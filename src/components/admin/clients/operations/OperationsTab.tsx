@@ -7,15 +7,17 @@ import {
     ProjectStage,
     ProjectTask,
     ProjectType,
-    getClientProjects,
-    getProjectStages,
-    getProjectTasks,
-    createProject,
-    createTask,
-    updateTask,
-    moveTask,
-    deleteTask,
 } from '@/lib/operations';
+import {
+    getAdminClientProjects,
+    getAdminProjectStages,
+    getAdminProjectTasks,
+    createAdminProject,
+    createAdminTask,
+    updateAdminTask,
+    moveAdminTask,
+    deleteAdminTask,
+} from '@/actions/admin-operations';
 import ProjectSidebar from './ProjectSidebar';
 import ProjectCreateModal from './ProjectCreateModal';
 import KanbanBoard from './KanbanBoard';
@@ -43,15 +45,15 @@ export default function OperationsTab({ clientId }: OperationsTabProps) {
     const loadProjects = useCallback(async () => {
         setLoading(true);
         try {
-            const projs = await getClientProjects(clientId);
+            const projs = await getAdminClientProjects(clientId);
             setProjects(projs);
 
             const taskMap = new Map<string, ProjectTask[]>();
             const stageMap = new Map<string, ProjectStage[]>();
             for (const p of projs) {
                 const [pStages, pTasks] = await Promise.all([
-                    getProjectStages(p.id),
-                    getProjectTasks(p.id),
+                    getAdminProjectStages(p.id),
+                    getAdminProjectTasks(p.id),
                 ]);
                 stageMap.set(p.id, pStages);
                 taskMap.set(p.id, pTasks);
@@ -86,8 +88,8 @@ export default function OperationsTab({ clientId }: OperationsTabProps) {
 
         // Refresh from DB
         Promise.all([
-            getProjectStages(selectedProjectId),
-            getProjectTasks(selectedProjectId),
+            getAdminProjectStages(selectedProjectId),
+            getAdminProjectTasks(selectedProjectId),
         ]).then(([s, t]) => {
             setStages(s);
             setTasks(t);
@@ -101,7 +103,7 @@ export default function OperationsTab({ clientId }: OperationsTabProps) {
         startDate?: string,
         targetDate?: string
     ) => {
-        const newId = await createProject(clientId, name, projectType, undefined, startDate, targetDate);
+        const newId = await createAdminProject(clientId, name, projectType, undefined, startDate, targetDate);
         setSelectedProjectId(newId);
         await loadProjects();
     };
@@ -109,7 +111,7 @@ export default function OperationsTab({ clientId }: OperationsTabProps) {
     const handleAddTask = async (stageId: string, title: string) => {
         if (!selectedProjectId) return;
         const stageTasks = tasks.filter((t) => t.stage_id === stageId);
-        const newTask = await createTask(selectedProjectId, stageId, title, stageTasks.length);
+        const newTask = await createAdminTask(selectedProjectId, stageId, title, stageTasks.length);
         setTasks((prev) => [...prev, newTask]);
         // Update sidebar cache
         setAllTasksByProject((prev) => {
@@ -120,10 +122,10 @@ export default function OperationsTab({ clientId }: OperationsTabProps) {
     };
 
     const handleMoveTask = async (taskId: string, newStageId: string, newPosition: number) => {
-        await moveTask(taskId, newStageId, newPosition);
+        await moveAdminTask(taskId, newStageId, newPosition);
         // Refresh board
         if (selectedProjectId) {
-            const updated = await getProjectTasks(selectedProjectId);
+            const updated = await getAdminProjectTasks(selectedProjectId);
             setTasks(updated);
             setAllTasksByProject((prev) => {
                 const m = new Map(prev);
@@ -138,9 +140,9 @@ export default function OperationsTab({ clientId }: OperationsTabProps) {
     };
 
     const handleTaskSave = async (taskId: string, updates: Partial<ProjectTask>) => {
-        await updateTask(taskId, updates);
+        await updateAdminTask(taskId, updates);
         if (selectedProjectId) {
-            const updated = await getProjectTasks(selectedProjectId);
+            const updated = await getAdminProjectTasks(selectedProjectId);
             setTasks(updated);
             setAllTasksByProject((prev) => {
                 const m = new Map(prev);
@@ -152,10 +154,10 @@ export default function OperationsTab({ clientId }: OperationsTabProps) {
     };
 
     const handleTaskDelete = async (taskId: string) => {
-        await deleteTask(taskId);
+        await deleteAdminTask(taskId);
         setSelectedTask(null);
         if (selectedProjectId) {
-            const updated = await getProjectTasks(selectedProjectId);
+            const updated = await getAdminProjectTasks(selectedProjectId);
             setTasks(updated);
             setAllTasksByProject((prev) => {
                 const m = new Map(prev);

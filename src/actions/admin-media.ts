@@ -49,6 +49,17 @@ export async function getAdminMediaItems(clientId: string, search?: string, stat
     return data;
 }
 
+export async function getAdminMediaItemById(id: string) {
+    const { data, error } = await supabaseAdmin
+        .from('client_media')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+    if (error || !data) throw new Error(`Failed to fetch media item: ${error?.message}`);
+    return data;
+}
+
 export async function createAdminMediaItem(clientId: string, title: string, type: MediaItemType) {
     const { data, error } = await supabaseAdmin
         .from('client_media')

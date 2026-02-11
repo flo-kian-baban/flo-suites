@@ -25,7 +25,6 @@ import {
     LinkType,
     ContactType,
     CreateClientPayload,
-    CreateClientPayload,
 } from '@/lib/clients';
 import { createAdminClient, updateAdminClient } from '@/actions/admin';
 
@@ -330,7 +329,7 @@ export default function ClientForm({ mode, initialData }: ClientFormProps) {
 
                 if (logoFile) {
                     const { publicUrl } = await uploadFile(`clients/${newId}/logo`, logoFile);
-                    await updateClient(newId, { logo_url: publicUrl });
+                    await updateAdminClient(newId, { logo_url: publicUrl });
                 }
                 router.push(`/admin/clients/${newId}`);
             } else if (initialData) {

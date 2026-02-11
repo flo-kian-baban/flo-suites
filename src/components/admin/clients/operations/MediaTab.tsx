@@ -7,9 +7,11 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    MediaItem, MediaItemStatus, MediaItemType, getMediaItems,
-    updateMediaStatus, deleteMediaItem,
+    MediaItem, MediaItemStatus, MediaItemType,
 } from '@/lib/client-media';
+import {
+    getAdminMediaItems, updateAdminMediaStatus, deleteAdminMediaItem,
+} from '@/actions/admin-media';
 import MediaPostModal from './MediaPostModal';
 import MediaPreview from './MediaPreview';
 
@@ -51,7 +53,7 @@ export default function MediaTab({ clientId, clientSlug }: MediaTabProps) {
     const load = useCallback(async () => {
         setLoading(true);
         try {
-            const data = await getMediaItems(clientId, search || undefined, statusFilter);
+            const data = await getAdminMediaItems(clientId, search || undefined, statusFilter);
             setItems(data);
         } catch (err) {
             console.error('Failed to load media:', err);
@@ -64,7 +66,7 @@ export default function MediaTab({ clientId, clientSlug }: MediaTabProps) {
 
     const handleStatusChange = async (id: string, status: MediaItemStatus) => {
         try {
-            await updateMediaStatus(id, status);
+            await updateAdminMediaStatus(id, status);
             load();
         } catch (err) {
             console.error('Failed to update status:', err);
@@ -75,7 +77,7 @@ export default function MediaTab({ clientId, clientSlug }: MediaTabProps) {
     const handleDelete = async (id: string) => {
         if (!confirm('Delete this media item and all its files?')) return;
         try {
-            await deleteMediaItem(id);
+            await deleteAdminMediaItem(id);
             load();
         } catch (err) {
             console.error('Failed to delete:', err);
@@ -105,8 +107,8 @@ export default function MediaTab({ clientId, clientSlug }: MediaTabProps) {
                             key={f.value}
                             onClick={() => setStatusFilter(f.value)}
                             className={`px-3 py-2 text-xs rounded-lg font-medium transition-all ${statusFilter === f.value
-                                    ? 'bg-flo-orange/20 text-flo-orange border border-flo-orange/30'
-                                    : 'bg-white/[0.04] text-white/40 border border-white/[0.06] hover:text-white/60'
+                                ? 'bg-flo-orange/20 text-flo-orange border border-flo-orange/30'
+                                : 'bg-white/[0.04] text-white/40 border border-white/[0.06] hover:text-white/60'
                                 }`}
                         >
                             {f.label}

@@ -3,7 +3,9 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { X, Upload, Video, FileText, Camera, Megaphone, Image, Loader2, CheckCircle2 } from 'lucide-react';
-import { MediaItemType, createMediaItem, uploadMediaFiles } from '@/lib/client-media';
+import { MediaItemType } from '@/lib/client-media';
+import { createAdminMediaItem, addAdminMediaAssets } from '@/actions/admin-media';
+import { supabase, BUCKET_NAME } from '@/lib/supabaseClient';
 
 const MEDIA_TYPES: { value: MediaItemType; label: string; icon: React.ElementType }[] = [
     { value: 'reel', label: 'Reel', icon: Video },
@@ -48,12 +50,39 @@ export default function MediaPostModal({ clientId, clientSlug, onClose, onCreate
 
         try {
             // Create media item
-            const mediaItemId = await createMediaItem(clientId, title.trim(), type);
+            const mediaItemId = await createAdminMediaItem(clientId, title.trim(), type);
 
             // Upload files
-            await uploadMediaFiles(mediaItemId, clientSlug, files, (idx, pct) => {
-                setProgress((prev) => ({ ...prev, [idx]: pct }));
-            });
+            const newAssets: any[] = [];
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const sanitizedName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+                const storagePath = `clients/${clientSlug}/media/${mediaItemId}/${sanitizedName}`;
+
+                setProgress((prev) => ({ ...prev, [i]: 30 }));
+
+                // Upload to storage (using client for now, assuming storage policies allow)
+                const { error: uploadError } = await supabase.storage
+                    .from(BUCKET_NAME)
+                    .upload(storagePath, file, { upsert: true, contentType: file.type });
+
+                if (uploadError) throw new Error(`Failed to upload ${file.name}: ${uploadError.message}`);
+
+                setProgress((prev) => ({ ...prev, [i]: 70 }));
+
+                newAssets.push({
+                    storage_bucket: BUCKET_NAME,
+                    storage_path: storagePath,
+                    mime_type: file.type || null,
+                    created_at: new Date().toISOString(),
+                });
+
+                setProgress((prev) => ({ ...prev, [i]: 100 }));
+            }
+
+            // Update DB with assets using secure action
+            await addAdminMediaAssets(mediaItemId, newAssets);
 
             onCreated();
         } catch (err) {
@@ -115,8 +144,8 @@ export default function MediaPostModal({ clientId, clientSlug, onClose, onCreate
                                         key={t.value}
                                         onClick={() => setType(t.value)}
                                         className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all border ${type === t.value
-                                                ? 'bg-flo-orange/15 text-flo-orange border-flo-orange/30'
-                                                : 'bg-white/[0.03] text-white/40 border-white/[0.06] hover:text-white/60'
+                                            ? 'bg-flo-orange/15 text-flo-orange border-flo-orange/30'
+                                            : 'bg-white/[0.03] text-white/40 border-white/[0.06] hover:text-white/60'
                                             }`}
                                     >
                                         <Icon className="w-3.5 h-3.5" />

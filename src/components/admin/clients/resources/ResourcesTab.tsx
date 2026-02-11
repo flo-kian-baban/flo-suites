@@ -7,9 +7,11 @@ import {
     DOC_TYPE_LABELS,
     DOC_TYPE_FULL_NAMES,
     ClientDocument,
-    ensureAllDocuments,
-    upsertDocument,
 } from '@/lib/client-documents';
+import {
+    ensureAdminAllDocuments,
+    upsertAdminDocument,
+} from '@/actions/admin-documents';
 import ResourceEditor from './ResourceEditor';
 
 const DOC_TYPES: { key: DocType; icon: typeof FileText }[] = [
@@ -37,7 +39,7 @@ export default function ResourcesTab({ clientId }: ResourcesTabProps) {
             setLoading(true);
             setError(null);
             try {
-                const all = await ensureAllDocuments(clientId);
+                const all = await ensureAdminAllDocuments(clientId);
                 if (!cancelled) setDocs(all);
             } catch (err: any) {
                 if (!cancelled) setError(err.message || 'Failed to load documents');
@@ -54,7 +56,7 @@ export default function ResourcesTab({ clientId }: ResourcesTabProps) {
         async (md: string) => {
             setSaving(true);
             try {
-                const updated = await upsertDocument(clientId, activeType, md);
+                const updated = await upsertAdminDocument(clientId, activeType, md);
                 setDocs((prev) =>
                     prev.map((d) => (d.doc_type === activeType ? updated : d))
                 );

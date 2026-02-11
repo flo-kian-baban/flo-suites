@@ -6,9 +6,11 @@ import {
     X, CheckCircle2, XCircle, Clock, Send, Loader2, Trash2,
 } from 'lucide-react';
 import {
-    MediaItemFull, MediaItemStatus, getMediaItemById,
-    updateMediaStatus, addMediaComment, getAssetUrl,
+    MediaItemFull, MediaItemStatus, getAssetUrl,
 } from '@/lib/client-media';
+import {
+    getAdminMediaItemById, updateAdminMediaStatus, addAdminMediaComment,
+} from '@/actions/admin-media';
 
 const STATUS_CONFIG: Record<MediaItemStatus, { label: string; color: string }> = {
     pending: { label: 'Pending Review', color: 'text-amber-400' },
@@ -30,7 +32,7 @@ export default function MediaPreview({ mediaItemId, onClose }: MediaPreviewProps
     const load = async () => {
         setLoading(true);
         try {
-            const data = await getMediaItemById(mediaItemId);
+            const data = await getAdminMediaItemById(mediaItemId);
             setItem(data);
         } catch (err) {
             console.error('Failed to load media item:', err);
@@ -43,7 +45,7 @@ export default function MediaPreview({ mediaItemId, onClose }: MediaPreviewProps
 
     const handleStatusChange = async (status: MediaItemStatus) => {
         try {
-            await updateMediaStatus(mediaItemId, status);
+            await updateAdminMediaStatus(mediaItemId, status);
             load();
         } catch (err) {
             console.error('Failed to update status:', err);
@@ -54,7 +56,7 @@ export default function MediaPreview({ mediaItemId, onClose }: MediaPreviewProps
         if (!commentText.trim()) return;
         setSubmittingComment(true);
         try {
-            await addMediaComment(mediaItemId, commentText.trim());
+            await addAdminMediaComment(mediaItemId, commentText.trim());
             setCommentText('');
             load();
         } catch (err) {
