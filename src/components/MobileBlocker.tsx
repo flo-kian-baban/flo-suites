@@ -21,9 +21,6 @@ export default function MobileBlocker({ children }: { children: React.ReactNode 
                     <h1 className="mobile-blocker-title">
                         Big decisions aren&apos;t made on small screens.
                     </h1>
-                    <p className="mobile-blocker-subtitle">
-                        Open Flo Suites on a desktop or laptop for the full experience.
-                    </p>
                 </div>
             </div>
 
