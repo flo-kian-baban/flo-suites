@@ -1,5 +1,6 @@
 'use client';
 
+// Client form for creating and editing admin clients
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
