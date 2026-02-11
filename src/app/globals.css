@@ -157,22 +157,11 @@
     background: rgba(168, 85, 247, 0.08);
 }
 
-.mobile-blocker-icon {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+.mobile-blocker-logo {
+    width: 72px;
+    height: auto;
     margin-bottom: 2rem;
-}
-
-.mobile-blocker-svg {
-    width: 32px;
-    height: 32px;
-    color: rgba(241, 89, 45, 0.7);
+    object-fit: contain;
 }
 
 .mobile-blocker-title {
