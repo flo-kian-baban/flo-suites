@@ -147,19 +147,19 @@ const StudioShowcase = () => {
             <div className="flex items-center gap-6 py-4">
                 <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-flo-orange/50 to-transparent" />
                 <span className="text-[12px] font-black uppercase tracking-[0.4em] text-white/90 whitespace-nowrap">
-                    The Process
+                    Work
                 </span>
                 <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-flo-orange/50 to-transparent" />
             </div>
 
-            {/* High-Impact Section Title */}
-            <div className="flex flex-col items-center text-center -mt-4 mb-6">
-                <span className="text-xl md:text-2xl font-bold text-white leading-tight">
-                    Execution Workflow.
+            {/* Title & Subtitle */}
+            <div className="flex flex-col items-center text-center -mt-2 mb-10">
+                <span className="text-xl md:text-2xl font-bold text-white mb-1">
+                    Cinematic Excellence.
                 </span>
-                <span className="text-3xl md:text-6xl font-black text-flo-orange uppercase tracking-tight mt-1 leading-[0.9]">
-                    THE PROCESS.
-                </span>
+                <h3 className="text-5xl md:text-7xl font-black text-flo-orange uppercase tracking-tight leading-none">
+                    FEATURED WORK.
+                </h3>
             </div>
 
             {/* Interactive Video Showcase - Unified Layout */}

@@ -5,11 +5,15 @@ import { X } from 'lucide-react';
 import SuiteHeader from './SuiteHeader';
 import TeamCard from './TeamCard';
 import CapabilitiesGrid from './CapabilitiesGrid';
+import MarketingFunnel from './MarketingFunnel';
+import DevSolutionsSection from './DevSolutionsSection';
+import StudioProcessStrip from './StudioProcessStrip';
 import ProcessSteps from './ProcessSteps';
 import StudioShowcase from './StudioShowcase';
 import ScrollTimeline from './ScrollTimeline';
 import EngagementInvestment from './EngagementInvestment';
-import FloStandardCallout from './FloStandardCallout';
+import StudioBookingSection from './StudioBookingSection';
+
 import SuiteCTA from './SuiteCTA';
 import KnowledgeGrid from './KnowledgeGrid';
 import { usePosts } from '@/hooks/usePosts';
@@ -19,6 +23,8 @@ const SuiteExpandedLayout = ({ suite, onClose }) => {
     const { teamPage, title, expandedContent, id } = suite;
     const { content } = useSiteContent();
     const headerVideo = content.suites?.[id]?.headerVideo;
+
+
 
     // Determine CMS post type based on suite ID
     const postType = id === 'marketing' ? 'blog' : id === 'dev' ? 'case_study' : undefined;
@@ -94,21 +100,51 @@ const SuiteExpandedLayout = ({ suite, onClose }) => {
                             videoUrl={headerVideo}
                         />
                         <TeamCard team={teamPage.team} />
+                        {id === 'marketing' && (
+                            <CapabilitiesGrid capabilities={teamPage.capabilities} hideHeader />
+                        )}
                     </motion.div>
 
-                    {/* Capabilities */}
-                    <motion.div variants={itemVariants}>
-                        <CapabilitiesGrid capabilities={teamPage.capabilities} />
-                    </motion.div>
+                    {/* Capabilities / Process Strip (non-marketing suites) */}
+                    {id !== 'marketing' && (
+                        <motion.div variants={itemVariants}>
+                            {id === 'studio' ? (
+                                <StudioProcessStrip />
+                            ) : id === 'dev' ? (
+                                <DevSolutionsSection />
+                            ) : (
+                                <CapabilitiesGrid capabilities={teamPage.capabilities} />
+                            )}
+                        </motion.div>
+                    )}
 
-                    {/* Process Section - Studio gets interactive showcase, others get Knowledge Grid or Process */}
+                    {/* Scroll-Activated Timeline (check both teamPage and expandedContent) */}
+                    {(teamPage?.timeline || expandedContent?.timeline) && (
+                        <motion.div variants={itemVariants}>
+                            <ScrollTimeline
+                                steps={teamPage?.timeline || expandedContent.timeline}
+                                eyebrow={id === 'marketing' ? "Architecture" : undefined}
+                                title={id === 'marketing' ? "Strategic Foundation." : undefined}
+                                highlightTitle={id === 'marketing' ? "THE ARCHITECTURE." : undefined}
+                            />
+                        </motion.div>
+                    )}
+
+                    {/* Marketing Funnel — only for marketing suite */ id === 'marketing' && (
+                        <div className="space-y-16">
+                            <motion.div variants={itemVariants}>
+                                <MarketingFunnel />
+                            </motion.div>
+                            <motion.div variants={itemVariants}>
+                                <KnowledgeGrid articles={displayArticles} suiteId="marketing" />
+                            </motion.div>
+                        </div>
+                    )}
+
+                    {/* Process Section - Studio gets interactive showcase, Dev/Others get Knowledge Grid or Process */}
                     {id === 'studio' ? (
                         <motion.div variants={itemVariants}>
                             <StudioShowcase />
-                        </motion.div>
-                    ) : id === 'marketing' ? (
-                        <motion.div variants={itemVariants}>
-                            <KnowledgeGrid articles={displayArticles} suiteId="marketing" />
                         </motion.div>
                     ) : id === 'dev' ? (
                         <motion.div variants={itemVariants}>
@@ -118,16 +154,9 @@ const SuiteExpandedLayout = ({ suite, onClose }) => {
                                 title="Project Case Studies"
                             />
                         </motion.div>
-                    ) : (
+                    ) : id !== 'marketing' && (
                         <motion.div variants={itemVariants}>
                             <ProcessSteps steps={teamPage.process} />
-                        </motion.div>
-                    )}
-
-                    {/* Scroll-Activated Timeline (if expandedContent has timeline) */}
-                    {expandedContent?.timeline && (
-                        <motion.div variants={itemVariants}>
-                            <ScrollTimeline steps={expandedContent.timeline} />
                         </motion.div>
                     )}
 
@@ -141,10 +170,12 @@ const SuiteExpandedLayout = ({ suite, onClose }) => {
                         </motion.div>
                     )}
 
-                    {/* Flo Standard Callout */}
-                    <motion.div variants={itemVariants}>
-                        <FloStandardCallout />
-                    </motion.div>
+                    {/* Studio Booking Section */}
+                    {id === 'studio' && (
+                        <motion.div variants={itemVariants}>
+                            <StudioBookingSection />
+                        </motion.div>
+                    )}
 
                 </div>
             </div>
@@ -155,7 +186,7 @@ const SuiteExpandedLayout = ({ suite, onClose }) => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
             >
-                <SuiteCTA suiteName={title} />
+                <SuiteCTA suiteName={title} suiteId={id} />
             </motion.div>
         </motion.div>
     );

@@ -293,7 +293,7 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
             onMouseEnter={handleMouseEnterWrapper}
             onMouseLeave={onMouseLeave}
             className={`
-                relative rounded-[2rem] overflow-hidden group
+                relative rounded-[2rem] overflow-hidden group h-full
                 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]
                 ${!isSelected && !isOtherSelected && suite.id !== 'connex' ? 'cursor-pointer' : ''}
                 

@@ -96,6 +96,30 @@
     background: rgba(255, 107, 53, 0.7);
 }
 
+/* FLO-styled thin scrollbar (for booking time slots etc.) */
+.flo-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(241, 89, 45, 0.35) rgba(255, 255, 255, 0.03);
+}
+
+.flo-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.flo-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+.flo-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(241, 89, 45, 0.35);
+    border-radius: 4px;
+}
+
+.flo-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(241, 89, 45, 0.55);
+}
+
 /* ─── Mobile Blocker ─────────────────────────────────── */
 
 /* By default (mobile-first): show blocker, hide content */
@@ -158,9 +182,9 @@
 }
 
 .mobile-blocker-logo {
-    width: 72px;
+    width: 100px;
     height: auto;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     object-fit: contain;
 }
 
@@ -178,4 +202,73 @@
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.35);
     margin: 0;
+}
+
+/* ─── Intro Overlay ──────────────────────────────────── */
+
+.intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 12vh;
+    /* optical centering — nudge text above true center */
+    background: #0f0f0f;
+    pointer-events: none;
+}
+
+.intro-text-container {
+    position: relative;
+    display: inline-block;
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: inherit;
+    max-width: 90vw;
+    text-align: left;
+}
+
+/* Invisible text that reserves the full dimensions */
+.intro-text-sizer {
+    visibility: hidden;
+    white-space: pre-wrap;
+    display: block;
+    padding-right: 6px;
+    /* reserve space for the blinking cursor */
+}
+
+/* Revealed text overlaid exactly on top */
+.intro-text-revealed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: pre-wrap;
+}
+
+.intro-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: rgba(241, 89, 45, 0.85);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink-caret 0.6s step-end infinite;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+@keyframes blink-caret {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }

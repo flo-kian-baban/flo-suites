@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SuiteTile from './SuiteTile';
 import { suites } from '../data/suites';
 
-const BentoGrid = ({ expandedSuite, onTileClick, onClose }) => {
+const BentoGrid = ({ expandedSuite, onTileClick, onClose, tilesReady = true }) => {
     const isAnyExpanded = expandedSuite !== null;
     const [hoveredId, setHoveredId] = useState(null);
 
@@ -81,6 +81,10 @@ const BentoGrid = ({ expandedSuite, onTileClick, onClose }) => {
         return hoveredSuite?.type || null;
     }, [hoveredId, isAnyExpanded]);
 
+    // Tile entrance animation config
+    const TILE_STAGGER = 0.09;  // seconds between each tile
+    const TILE_DURATION = 0.65; // seconds per tile animation
+
     return (
         <div className="w-full h-full p-4 relative overflow-hidden">
             {/* 
@@ -96,7 +100,7 @@ const BentoGrid = ({ expandedSuite, onTileClick, onClose }) => {
                     ease: [0.2, 0, 0, 1] // Aggressive push
                 }}
             >
-                {suites.map((suite) => {
+                {suites.map((suite, index) => {
                     const isSelected = expandedSuite?.id === suite.id;
                     const isOtherSelected = isAnyExpanded && !isSelected;
                     const isHovered = hoveredId === suite.id;
@@ -107,24 +111,39 @@ const BentoGrid = ({ expandedSuite, onTileClick, onClose }) => {
                     const highlightMode = (isAnyExpanded) ? 'none' : (isHovered ? 'active' : (isRelated ? 'related' : 'none'));
 
                     return (
-                        <SuiteTile
+                        <motion.div
                             key={suite.id}
-                            suite={suite}
-                            isSelected={isSelected}
-                            isOtherSelected={isOtherSelected}
-                            highlightMode={highlightMode}
-                            hoveredType={hoveredType}
-                            onMouseEnter={() => setHoveredId(suite.id)}
-                            onMouseLeave={() => setHoveredId(null)}
-                            onClick={() => {
-                                if (isSelected) return; // Don't re-trigger
-                                onTileClick(suite);
+                            className="h-full min-h-0"
+                            initial={tilesReady ? false : { opacity: 0, y: 60 }}
+                            animate={tilesReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
+                            transition={{
+                                duration: TILE_DURATION,
+                                delay: tilesReady ? index * TILE_STAGGER : 0,
+                                ease: [0.16, 1, 0.3, 1], // ease-out-expo
                             }}
-                            onClose={(e) => {
-                                e?.stopPropagation();
-                                onClose();
+                            style={{
+                                gridColumn: `${suite.gridConfig.colStart} / span ${suite.gridConfig.colSpan}`,
+                                gridRow: `${suite.gridConfig.rowStart} / span ${suite.gridConfig.rowSpan}`,
                             }}
-                        />
+                        >
+                            <SuiteTile
+                                suite={suite}
+                                isSelected={isSelected}
+                                isOtherSelected={isOtherSelected}
+                                highlightMode={highlightMode}
+                                hoveredType={hoveredType}
+                                onMouseEnter={() => setHoveredId(suite.id)}
+                                onMouseLeave={() => setHoveredId(null)}
+                                onClick={() => {
+                                    if (isSelected) return; // Don't re-trigger
+                                    onTileClick(suite);
+                                }}
+                                onClose={(e) => {
+                                    e?.stopPropagation();
+                                    onClose();
+                                }}
+                            />
+                        </motion.div>
                     );
                 })}
             </motion.div>
@@ -133,3 +152,4 @@ const BentoGrid = ({ expandedSuite, onTileClick, onClose }) => {
 };
 
 export default BentoGrid;
+

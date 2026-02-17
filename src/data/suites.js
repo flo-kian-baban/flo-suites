@@ -3,7 +3,7 @@ export const suites = [
         id: 'flo-os',
         title: 'Flo OS',
         type: 'offer',
-        tagline: 'Your integrated business operating system.',
+        tagline: 'Integrated Operating System',
         isCenterpiece: true,
         gridArea: 'centerpiece',
         gridConfig: { rowStart: 1, rowSpan: 4, colStart: 1, colSpan: 4 },
@@ -119,6 +119,11 @@ export const suites = [
                     "A singular source of truth for all data and decisions",
                     "Compounding operational leverage and asset value"
                 ]
+
+            },
+            timelineConfig: {
+                subtitle: "Strategic Rollout.",
+                title: "THE TIMELINE."
             }
         }
     },
@@ -126,7 +131,7 @@ export const suites = [
         id: 'media-marketing',
         title: `Media Marketing`,
         type: 'offer',
-        tagline: 'Content + paid distribution, built as one system.',
+        tagline: 'Content + Distribution Engine',
         gridArea: 'media-marketing',
         gridConfig: { rowStart: 1, rowSpan: 4, colStart: 5, colSpan: 3 },
         description: 'The ultimate growth engine. We combine high-velocity content production with scientific acquisition strategy to capture attention and convert it into revenue.',
@@ -247,13 +252,18 @@ export const suites = [
                     "Sustained market momentum and audience trust",
                     "Predictable attention capture and conversion flow"
                 ]
+
+            },
+            timelineConfig: {
+                subtitle: "Growth Engine.",
+                title: "THE PROCESS."
             }
         }
     },
     {
         id: 'studio',
         title: 'Studio',
-        tagline: 'High-velocity content production engine.',
+        tagline: 'High-Velocity Production',
         gridArea: 'studio',
         gridConfig: { rowStart: 1, rowSpan: 2, colStart: 8, colSpan: 5 },
         description: 'A premium content factory designed for speed and quality. From brand visuals to video production, we build the assets that drive your narrative forward.',
@@ -313,7 +323,7 @@ export const suites = [
     {
         id: 'marketing',
         title: 'Marketing',
-        tagline: 'Scientific growth & acquisition strategy.',
+        tagline: 'Scientific Growth Strategy',
         gridArea: 'marketing',
         gridConfig: { rowStart: 3, rowSpan: 2, colStart: 10, colSpan: 3 },
         description: 'We replace guesswork with engineering. A data-first approach to acquisition, retention, and scaling your revenue through paid and organic channels.',
@@ -345,16 +355,16 @@ export const suites = [
             },
             capabilities: [
                 {
-                    title: "Strategy",
-                    items: ["Market Positioning", "Offer Design", "Campaign Architecture"]
+                    title: "Brand Positioning",
+                    description: "Define the offer, messaging, and tone so every piece of execution stays consistent and intentional."
                 },
                 {
-                    title: "Distribution",
-                    items: ["Paid Social (Meta/TikTok)", "Search (Google)", "Organic Content Strategy"]
+                    title: "Target Audience",
+                    description: "Identify who we're targeting, why they care, and what triggers action — then build the campaign around that."
                 },
                 {
-                    title: "Optimization",
-                    items: ["A/B Testing", "Performance Analysis", "Budget Scaling"]
+                    title: "Execution Quality",
+                    description: "Studio delivers premium content. Development builds fast, high-trust pages — so the marketing actually performs."
                 }
             ],
             process: [
@@ -367,7 +377,24 @@ export const suites = [
                 standards: "Data-Driven",
                 turnaround: "Daily Opts",
                 tools: ["Meta Ads", "Google Ads", "GA4", "TripleWhale"]
-            }
+            },
+            timeline: [
+                {
+                    title: "COP",
+                    subtitle: "Client Operating Profile",
+                    description: "Capture the business reality — offers, goals, audience, constraints, and current gaps."
+                },
+                {
+                    title: "MCI",
+                    subtitle: "Market & Competitive Intelligence",
+                    description: "Map the market — competitors, positioning angles, demand signals, and what wins attention."
+                },
+                {
+                    title: "SB",
+                    subtitle: "System Blueprint",
+                    description: "Turn strategy into execution — the campaign system, assets, and rollout plan across suites."
+                }
+            ]
         }
     },
     {
@@ -396,9 +423,9 @@ export const suites = [
         },
         expandedContent: {
             engagementType: "Purposeful Engagement",
-            outcome: "A machine that turns attention into revenue.",
+            outcome: "Turn Traffic into Revenue.",
             subtitle: "Conversion Journey Architecture",
-            outcomeDesc: "We build a clear, frictionless path for your customers to take action. No distractions, just conversion.",
+            outcomeDesc: "We build a clear path for your customers to take action. No distractions, just conversion.",
 
             whatItIs: [
                 "A structured conversion system",
@@ -489,6 +516,11 @@ export const suites = [
                     "Seamless tracking and data attribution across the journey",
                     "Measurable liquidity and predictable ROI acquisition"
                 ]
+
+            },
+            timelineConfig: {
+                subtitle: "Conversion Architecture.",
+                title: "THE BLUEPRINT."
             }
         }
     },
@@ -535,7 +567,7 @@ export const suites = [
     {
         id: 'dev',
         title: 'Development',
-        tagline: 'Digital infrastructure & funnel architecture.',
+        tagline: 'Infrastructure & Architecture',
         gridArea: 'dev',
         gridConfig: { rowStart: 5, rowSpan: 4, colStart: 9, colSpan: 4 },
         description: 'Building the machines that capture value. We design and develop high-converting funnels, custom web applications, and technical automations.',

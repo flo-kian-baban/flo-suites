@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 import FloOSApplicationForm from './FloOSApplicationForm';
-import FunnelBuilderForm from './FunnelBuilderForm';
 import AboutFloChat from './AboutFloChat';
 import ScrollTimeline from './suite-expanded/ScrollTimeline';
 import EngagementInvestment from './suite-expanded/EngagementInvestment';
@@ -11,26 +10,15 @@ const ExpandedContent = ({ suite, onClose }) => {
     console.log('ExpandedContent suite:', suite.id, suite.title);
     const [showApplication, setShowApplication] = useState(false);
 
-    // Determines which form to show based on suite ID
+    // All offer tiles use the unified FloOSApplicationForm with source tracking
     const renderApplicationForm = () => {
-        if (suite.id === 'flo-os') {
-            return (
-                <FloOSApplicationForm
-                    onClose={onClose}
-                    onBack={() => setShowApplication(false)}
-                />
-            );
-        }
-        if (suite.id === 'Funnel Builder') {
-            return (
-                <FunnelBuilderForm
-                    onClose={onClose}
-                    onBack={() => setShowApplication(false)}
-                />
-            );
-        }
-
-        return null;
+        return (
+            <FloOSApplicationForm
+                onClose={onClose}
+                onBack={() => setShowApplication(false)}
+                source={suite.id}
+            />
+        );
     };
 
     const handlePrimaryAction = () => {

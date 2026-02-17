@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import BentoGrid from './components/BentoGrid';
+import IntroOverlay from './components/IntroOverlay';
 
 function App() {
     const [expandedSuite, setExpandedSuite] = useState(null);
+
+    // Intro state machine: 'intro' → 'tilesIn'
+    // Check prefers-reduced-motion to skip animation
+    const [phase, setPhase] = useState(() => {
+        if (typeof window !== 'undefined' &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return 'tilesIn';
+        }
+        return 'intro';
+    });
+
+    const handleIntroComplete = () => {
+        setPhase('tilesIn');
+    };
 
     // Handle ESC key to close expanded tile
     useEffect(() => {
@@ -30,7 +46,13 @@ function App() {
                 expandedSuite={expandedSuite}
                 onTileClick={handleTileClick}
                 onClose={handleClose}
+                tilesReady={phase === 'tilesIn'}
             />
+            <AnimatePresence>
+                {phase === 'intro' && (
+                    <IntroOverlay onComplete={handleIntroComplete} />
+                )}
+            </AnimatePresence>
         </div>
     );
 }

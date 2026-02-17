@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import {
     Image,
     Layers,
-    Users,
 } from 'lucide-react';
 
 interface NavItem {
@@ -15,11 +14,6 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-    {
-        label: 'Clients',
-        href: '/admin/clients',
-        icon: <Users className="w-5 h-5" />,
-    },
     {
         label: 'Applications',
         href: '/admin/applications',

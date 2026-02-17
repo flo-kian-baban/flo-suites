@@ -37,7 +37,7 @@ const BlogGrid = ({ articles, onSelectArticle, title = "The Knowledge Grid" }) =
                 animate="show"
             >
                 {articles.map((article) => (
-                    <motion.div key={article.id} variants={item} className="h-full">
+                    <motion.div key={article.id} variants={item} className="">
                         <BlogCard
                             article={article}
                             onClick={onSelectArticle}

@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight, CheckCircle2, Layers, Cpu, Palette, TrendingUp, Brain, Info, Sparkles, Plus, Minus } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { X, ArrowRight, CheckCircle2, Layers, Cpu, Palette, TrendingUp, Brain, Sparkles } from 'lucide-react';
 import FloOSApplicationForm from './FloOSApplicationForm';
 import SuiteExpandedLayout from './suite-expanded/SuiteExpandedLayout';
+import TimelineSection from './suite-expanded/TimelineSection';
 import { suites } from '../data/suites';
 import { useSiteContent } from '../hooks/useSiteContent';
 
@@ -16,119 +17,9 @@ const SUITE_ICONS = {
     'media-marketing': Layers
 };
 
-const SuiteAccordionItem = ({ title, subtitle, children, isStandard = false }) => {
-    const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <div className={`rounded-xl border transition-all duration-300 overflow-hidden ${isOpen
-            ? 'bg-white/[0.03] border-white/10'
-            : 'bg-transparent border-white/5 hover:bg-white/[0.02] hover:border-white/10'
-            } ${isStandard ? 'mt-4 border-flo-orange/20 bg-flo-orange/[0.02]' : ''}`}>
 
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between p-6 text-left group"
-            >
-                <div className="flex flex-col gap-1 pr-4">
-                    <h4 className={`text-xl font-bold ${isStandard ? 'text-flo-orange' : 'text-white group-hover:text-flo-orange'} transition-colors`}>
-                        {title}
-                    </h4>
-                    <p className="text-sm text-neutral-400 font-medium">
-                        {subtitle}
-                    </p>
-                </div>
-                <div className={`p-2 rounded-full border shrink-0 transition-all duration-300 ${isOpen
-                    ? 'bg-white/10 border-white/20 rotate-45'
-                    : 'bg-transparent border-white/10 group-hover:border-white/20'
-                    }`}>
-                    <Plus className={`w-5 h-5 ${isStandard ? 'text-flo-orange' : 'text-white'}`} />
-                </div>
-            </button>
 
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.2, 0, 0, 1] }}
-                    >
-                        <div className="px-6 pb-6 pt-0">
-                            <div className="pt-6 border-t border-white/5 text-neutral-300 text-sm leading-relaxed space-y-4">
-                                {children}
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
-};
-
-const TimelineStep = ({ step, index }) => {
-    const isLeft = index % 2 === 0;
-
-    return (
-        <div className={`relative flex items-center justify-between md:flex-row ${isLeft ? '' : 'md:flex-row-reverse'} mb-12 last:mb-0 group`}>
-            {/* Card */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ margin: "-10% 0px -10% 0px", once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="w-full md:w-[44%] pl-12 md:pl-0"
-            >
-                <div className="relative bg-white/[0.03] border border-white/10 rounded-2xl p-6 md:p-8 hover:border-white/20 transition-all duration-500 backdrop-blur-sm overflow-hidden group/card">
-                    {/* Background Step Number - Right Top */}
-                    <span className="absolute top-0 right-2 text-7xl md:text-9xl font-black text-white/[0.03] leading-none pointer-events-none transition-all duration-500 group-hover/card:text-white/[0.07] group-hover/card:scale-110">
-                        {index + 1}
-                    </span>
-
-                    <div className="flex flex-col gap-0 relative z-10">
-                        <div className={`flex flex-col items-start`}>
-                            <span className="text-3xl md:text-5xl font-black text-flo-orange uppercase tracking-tight mt-0 leading-[0.9]">
-                                {step.title}
-                            </span>
-                            {step.timeframe && (
-                                <span className="text-[14px] font-bold text-flo-orange/40 uppercase tracking-[0.2em] mt-3">
-                                    {step.timeframe}
-                                </span>
-                            )}
-                        </div>
-                        <p className="text-neutral-300 text-sm leading-relaxed max-w-[80%] mt-3">
-                            {step.description}
-                        </p>
-                    </div>
-                </div>
-            </motion.div>
-
-            {/* Spacer */}
-            <div className="hidden md:block w-[45%]" />
-
-            {/* Bullet - Absolute Center - STATIC ORANGE */}
-            <div className="absolute left-[19px] md:left-1/2 top-1/2 -translate-y-1/2 w-4 h-4 -translate-x-1/2 z-10">
-                <div className="absolute inset-0 rounded-full bg-flo-orange shadow-[0_0_12px_rgba(241,89,45,1)] border-2 border-[#0A0A0A]" />
-            </div>
-        </div>
-    );
-};
-
-const TimelineSection = ({ timeline }) => {
-    return (
-        <div className="relative w-full max-w-5xl mx-auto py-12 md:py-24">
-            {/* Line - STATIC ORANGE */}
-            <div className="absolute left-[19px] md:left-1/2 top-12 bottom-12 w-[2px] bg-white/5 md:-translate-x-1/2">
-                <div className="w-full h-full bg-flo-orange shadow-[0_0_15px_rgba(241,89,45,0.6)]" />
-            </div>
-
-            <div className="flex flex-col gap-8">
-                {timeline.map((step, idx) => (
-                    <TimelineStep key={idx} step={step} index={idx} />
-                ))}
-            </div>
-        </div>
-    );
-};
 
 const OfferExpandedView = ({ suite, onClose }) => {
     const { expandedContent, teamPage } = suite;
@@ -260,13 +151,13 @@ const OfferExpandedView = ({ suite, onClose }) => {
                     </motion.div>
 
                     {/* 2. Video Walkthrough - Only show if video exists for this offer */}
-                    {content.suites?.[suite.id]?.walkthroughVideo && (
+                    {content.suites?.[suite.id]?.headerVideo && (
                         <motion.div variants={itemVariants} className="relative group">
                             <div className="absolute -inset-1 bg-gradient-to-r mx-auto w-2/3 from-flo-orange/20 to-transparent rounded-[2rem] blur opacity-25 group-hover:opacity-40 transition-opacity" />
                             <div className="relative aspect-video w-2/3 mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl">
                                 <video
                                     className="w-full h-full object-cover"
-                                    src={content.suites[suite.id].walkthroughVideo}
+                                    src={content.suites[suite.id].headerVideo}
                                     controls
                                     playsInline
                                 />
@@ -295,74 +186,46 @@ const OfferExpandedView = ({ suite, onClose }) => {
                             </span>
                         </div>
 
-                        <div className="flex flex-col gap-4">
+                        <div className={`grid grid-cols-1 md:grid-cols-2 gap-5 ${(expandedContent.poweredBy || []).length === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
                             {/* Suite Containers */}
                             {(expandedContent.poweredBy || []).map((suiteId) => {
                                 const suiteData = suites.find(s => s.id === suiteId);
                                 if (!suiteData) return null;
 
                                 return (
-                                    <SuiteAccordionItem
+                                    <div
                                         key={suiteId}
-                                        title={suiteData.title}
-                                        subtitle={`Contributes: ${suiteData.tagline}`}
+                                        className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/suite overflow-hidden"
                                     >
-                                        <p className="mb-4 text-neutral-300">
-                                            {suiteData.description}
-                                        </p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {(suiteData.deliverables || []).slice(0, 4).map((item, idx) => (
-                                                <span key={idx} className="px-2 py-1 rounded bg-white/5 text-xs font-medium text-neutral-400 border border-white/5">
-                                                    {item}
+
+
+                                        <div className="">
+                                            <div className="flex items-center gap-3 mb-2">
+                                                <h4 className="text-3xl font-bold text-flo-orange group-hover/suite:text-flo-orange transition-colors">
+                                                    {suiteData.title}
+                                                </h4>
+                                                <span className="text-3xl font-black tracking-widest text-transparent font-outline-2" style={{ WebkitTextStroke: '1px #FFFFFF' }}>
+                                                    SUITE
                                                 </span>
-                                            ))}
+                                            </div>
+                                            <p className="text-lg uppercase text-white">
+                                                {suiteData.tagline}
+                                            </p>
+                                            <p className="text-neutral-600 mt-1 leading-relaxed pt-1 group-hover/suite:text-white transition-colors duration-300">
+                                                {suiteData.description}
+                                            </p>
                                         </div>
-                                    </SuiteAccordionItem>
+                                    </div>
                                 );
                             })}
-
-                            <SuiteAccordionItem
-                                title="Flo Standard"
-                                subtitle="Where the real power is unlocked."
-                                isStandard={true}
-                            >
-                                <p className="font-medium text-white/90 mb-2">
-                                    The Value of Usage Compounding
-                                </p>
-                                <p>
-                                    Isolated efforts create friction. By bundling these suites together through Flo Standard, we align strategy, content, and technology into a single efficient workflow.
-                                </p>
-                                <p>
-                                    This alignment creates leverage—where every piece of content, every funnel, and every ad dollar works together to multiply your results for long-term impact.
-                                </p>
-                            </SuiteAccordionItem>
                         </div>
                     </motion.div>
 
-                    {/* 5. Process Timeline */}
-                    {expandedContent.timeline && (
-                        <motion.div variants={itemVariants} className="w-full space-y-0">
-                            {/* Section Header - Eyebrow */}
-                            <div className="flex items-center gap-6 py-12">
-                                <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-flo-orange/50 to-transparent" />
-                                <span className="text-[12px] font uppercase tracking-[0.4em] text-white/90 whitespace-nowrap">
-                                    The Process
-                                </span>
-                                <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-flo-orange/50 to-transparent" />
-                            </div>
-
-                            {/* High-Impact Section Title */}
-                            <div className="flex flex-col items-center text-center mt-2 pb-10">
-                                <span className="text-xl md:text-2xl font-bold text-white leading-tight">
-                                    Strategic Rollout.
-                                </span>
-                                <span className="text-3xl md:text-6xl font-black text-flo-orange uppercase tracking-tight mt-1 leading-[0.9]">
-                                    THE TIMELINE.
-                                </span>
-                            </div>
-                            <TimelineSection timeline={expandedContent.timeline} />
-                        </motion.div>
-                    )}
+                    <TimelineSection
+                        timeline={expandedContent.timeline}
+                        title={expandedContent.timelineConfig?.title}
+                        subtitle={expandedContent.timelineConfig?.subtitle}
+                    />
 
                     {/* 4. Action CTA */}
                     <motion.div

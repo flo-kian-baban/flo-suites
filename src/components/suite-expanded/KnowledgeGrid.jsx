@@ -7,7 +7,7 @@ const KnowledgeGrid = ({ articles, suiteId, title }) => {
     const [selectedArticle, setSelectedArticle] = useState(null);
 
     return (
-        <div className="relative min-h-[600px]">
+        <div className="relative">
             <AnimatePresence mode="wait">
                 {!selectedArticle ? (
                     <motion.div

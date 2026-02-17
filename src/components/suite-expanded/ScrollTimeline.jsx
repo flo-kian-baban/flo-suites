@@ -4,7 +4,12 @@ import { motion } from 'framer-motion';
 /**
  * ScrollTimeline - A vertical timeline component (Static Version)
  */
-const ScrollTimeline = ({ steps }) => {
+const ScrollTimeline = ({
+    steps,
+    eyebrow = "How The System Works",
+    title = "Operational Blueprint.",
+    highlightTitle = "THE SYSTEM."
+}) => {
     if (!steps || steps.length === 0) return null;
 
     return (
@@ -13,7 +18,7 @@ const ScrollTimeline = ({ steps }) => {
             <div className="flex items-center gap-6">
                 <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-flo-orange/50 to-transparent" />
                 <span className="text-[12px] font-black uppercase tracking-[0.4em] text-white/90 whitespace-nowrap">
-                    How The System Works
+                    {eyebrow}
                 </span>
                 <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-flo-orange/50 to-transparent" />
             </div>
@@ -21,10 +26,10 @@ const ScrollTimeline = ({ steps }) => {
             {/* High-Impact Section Title */}
             <div className="flex flex-col items-center text-center">
                 <span className="text-xl md:text-2xl font-bold text-white leading-tight">
-                    Operational Blueprint.
+                    {title}
                 </span>
                 <span className="text-3xl md:text-6xl font-black text-flo-orange uppercase tracking-tight mt-1 leading-[0.9]">
-                    THE SYSTEM.
+                    {highlightTitle}
                 </span>
             </div>
 
@@ -48,7 +53,7 @@ const ScrollTimeline = ({ steps }) => {
                                 className={`relative flex items-center gap-8 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}
                             >
                                 {/* Step Container */}
-                                <div className={`w-[calc(50%-2rem)] ${isLeft ? 'text-right' : 'text-left'}`}>
+                                <div className={`w-[calc(50%-2rem)] text-left`}>
                                     <div
                                         className="relative p-6 rounded-2xl bg-[#1A1A1A]/80 backdrop-blur-xl border border-flo-orange/20 transition-all duration-500 shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.06),0_0_20px_rgba(241,89,45,0.1)] overflow-hidden group/card"
                                     >
@@ -58,10 +63,15 @@ const ScrollTimeline = ({ steps }) => {
                                         </span>
 
                                         {/* High-Impact Headline */}
-                                        <div className={`mb-2 flex flex-col ${isLeft ? 'items-end' : 'items-start'} relative z-10`}>
+                                        <div className={`mb-2 flex flex-col items-start relative z-10`}>
                                             <span className="text-3xl md:text-5xl font-black text-flo-orange uppercase tracking-tight mt-1 leading-[0.9]">
                                                 {step.title}
                                             </span>
+                                            {step.subtitle && (
+                                                <span className="text-sm md:text-base font-semibold text-neutral-400 mt-2 tracking-wide">
+                                                    {step.subtitle}
+                                                </span>
+                                            )}
                                             {step.timeframe && (
                                                 <span className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mt-2">
                                                     {step.timeframe}

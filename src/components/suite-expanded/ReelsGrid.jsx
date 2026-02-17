@@ -35,15 +35,6 @@ const ReelsGrid = () => {
 
     return (
         <div className="space-y-6">
-            {/* Section Header */}
-            <div>
-                <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">
-                    Reels.
-                </h3>
-                <p className="text-sm text-white/50 mt-1">
-                    Recent studio highlights
-                </p>
-            </div>
 
             {/* Reels Carousel - Viewport Container */}
             <div className="relative">
