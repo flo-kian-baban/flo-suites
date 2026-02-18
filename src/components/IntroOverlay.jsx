@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const PHRASES = [
-    'One partner.',
-    'Multiple suites.',
-    'Real growth.',
+    'One Partner.',
+    'Multiple Suites.',
+    'Real Growth.',
 ];
 
 // Total intro duration target: ~2.5s
