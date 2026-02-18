@@ -7,6 +7,14 @@ import TimelineSection from './suite-expanded/TimelineSection';
 import { suites } from '../data/suites';
 import { useSiteContent } from '../hooks/useSiteContent';
 import VideoWithPlaceholder from './VideoWithPlaceholder';
+import OfferChatPanel from './OfferChatPanel';
+
+// Map suite IDs to offer-chat API keys
+const OFFER_KEY_MAP = {
+    'flo-os': 'flo_os',
+    'Funnel Builder': 'funnel_builder',
+    'media-marketing': 'media_marketing',
+};
 
 // Map suite IDs to icons for the "Powered By" section
 const SUITE_ICONS = {
@@ -151,21 +159,34 @@ const OfferExpandedView = ({ suite, onClose }) => {
                         </div>
                     </motion.div>
 
-                    {/* 2. Video Walkthrough - Only show if video exists for this offer */}
-                    {content.suites?.[suite.id]?.headerVideo && (
-                        <motion.div variants={itemVariants} className="relative group">
-                            <div className="absolute -inset-1 bg-gradient-to-r mx-auto w-2/3 from-flo-orange/20 to-transparent rounded-[2rem] blur opacity-25 group-hover:opacity-40 transition-opacity" />
-                            <div className="relative aspect-video w-2/3 mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl">
-                                <VideoWithPlaceholder
-                                    src={content.suites[suite.id].headerVideo}
-                                    containerClassName="w-full h-full"
-                                    className="w-full h-full object-cover"
-                                    controls
-                                    playsInline
+                    {/* 2. Video Walkthrough + Chat Panel */}
+                    <motion.div variants={itemVariants} className="flex flex-col md:flex-row gap-6 items-stretch">
+                        {/* Video */}
+                        {content.suites?.[suite.id]?.headerVideo && (
+                            <div className="relative group flex-1 min-w-0">
+                                <div className="absolute -inset-1 bg-gradient-to-r from-flo-orange/20 to-transparent rounded-[2rem] blur opacity-25 group-hover:opacity-40 transition-opacity" />
+                                <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl">
+                                    <VideoWithPlaceholder
+                                        src={content.suites[suite.id].headerVideo}
+                                        containerClassName="w-full h-full"
+                                        className="w-full h-full object-cover"
+                                        controls
+                                        playsInline
+                                    />
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Chat Panel */}
+                        {OFFER_KEY_MAP[suite.id] && (
+                            <div className="w-full md:w-[360px] shrink-0 h-[400px] md:h-auto">
+                                <OfferChatPanel
+                                    offerKey={OFFER_KEY_MAP[suite.id]}
+                                    offerTitle={suite.title}
                                 />
                             </div>
-                        </motion.div>
-                    )}
+                        )}
+                    </motion.div>
 
                     {/* 3. The System / How it Works */}
                     <motion.div ref={systemSectionRef} variants={itemVariants} className="space-y-0">
