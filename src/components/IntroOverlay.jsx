@@ -17,7 +17,7 @@ const IntroOverlay = ({ onComplete }) => {
     const [isDone, setIsDone] = useState(false);
     const timerRef = useRef(null);
 
-    const fullText = PHRASES.join(' ');
+    const fullText = PHRASES.join('\n');
     const totalChars = fullText.length;
 
     // Phrase boundaries for pausing
