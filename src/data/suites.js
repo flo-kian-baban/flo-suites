@@ -74,7 +74,14 @@ export const suites = [
                 "Decision-making clarity and direction"
             ],
 
-            poweredBy: ['studio', 'marketing', 'dev'],
+            poweredBy: [
+                'studio',
+                'marketing',
+                {
+                    id: 'dev',
+                    description: 'Full access to our engineering team for custom solutions. We build, maintain, and scale the technical infrastructure that powers your entire ecosystem.'
+                }
+            ],
 
             whoFor: "Businesses tired of disconnected marketing. Founders who want systems, not tactics. Teams ready for long-term growth. Companies investing in clarity and scale.",
 
@@ -471,7 +478,14 @@ export const suites = [
                 "Scalable campaign foundation"
             ],
 
-            poweredBy: ['studio', 'marketing', 'dev'],
+            poweredBy: [
+                'studio',
+                'marketing',
+                {
+                    id: 'dev',
+                    description: 'Focused development for high-performance landing pages. We engineer fast, responsive, and conversion-optimized pages to maximize your campaign results.'
+                }
+            ],
 
             whoFor: "Launching a new offer. Scaling an existing service. Adding conversion to existing traffic. Businesses that need results, not just visibility.",
 

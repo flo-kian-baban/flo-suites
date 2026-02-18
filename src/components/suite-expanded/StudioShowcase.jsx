@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import VideoWithPlaceholder from '../VideoWithPlaceholder';
 import { motion, LayoutGroup } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import ReelsGrid from './ReelsGrid';
@@ -196,10 +197,11 @@ const StudioShowcase = () => {
 
                                 {/* Video Element - active card */}
                                 {isActive && video.videoSrc && (
-                                    <video
+                                    <VideoWithPlaceholder
                                         ref={videoRef}
                                         src={video.videoSrc}
-                                        className="absolute inset-0 w-full h-full object-cover"
+                                        containerClassName="absolute inset-0 w-full h-full"
+                                        className="w-full h-full object-cover"
                                         loop
                                         muted={isMuted}
                                         playsInline
@@ -209,10 +211,11 @@ const StudioShowcase = () => {
 
                                 {/* Video Element - inactive (stacked) cards */}
                                 {!isActive && video.videoSrc && (
-                                    <video
+                                    <VideoWithPlaceholder
                                         ref={el => { inactiveVideoRefs.current[index] = el; }}
                                         src={video.videoSrc}
-                                        className="absolute inset-0 w-full h-full object-cover"
+                                        containerClassName="absolute inset-0 w-full h-full"
+                                        className="w-full h-full object-cover"
                                         loop
                                         muted
                                         playsInline

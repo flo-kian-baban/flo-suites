@@ -180,14 +180,7 @@ const SuiteExpandedLayout = ({ suite, onClose }) => {
                 </div>
             </div>
 
-            {/* Footer CTA */}
-            <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5 }}
-            >
-                <SuiteCTA suiteName={title} suiteId={id} />
-            </motion.div>
+
         </motion.div>
     );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import VideoWithPlaceholder from '../VideoWithPlaceholder';
 import { motion } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
@@ -90,7 +91,7 @@ const ReelCard = ({ reel, isHovered, onMouseEnter, onMouseLeave }) => {
         >
             {/* Video or Poster Background */}
             {hasVideo ? (
-                <video
+                <VideoWithPlaceholder
                     ref={videoRef}
                     src={reel.videoUrl}
                     className="absolute inset-0 w-full h-full object-cover"

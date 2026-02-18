@@ -6,6 +6,7 @@ import SuiteExpandedLayout from './suite-expanded/SuiteExpandedLayout';
 import TimelineSection from './suite-expanded/TimelineSection';
 import { suites } from '../data/suites';
 import { useSiteContent } from '../hooks/useSiteContent';
+import VideoWithPlaceholder from './VideoWithPlaceholder';
 
 // Map suite IDs to icons for the "Powered By" section
 const SUITE_ICONS = {
@@ -155,9 +156,10 @@ const OfferExpandedView = ({ suite, onClose }) => {
                         <motion.div variants={itemVariants} className="relative group">
                             <div className="absolute -inset-1 bg-gradient-to-r mx-auto w-2/3 from-flo-orange/20 to-transparent rounded-[2rem] blur opacity-25 group-hover:opacity-40 transition-opacity" />
                             <div className="relative aspect-video w-2/3 mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl">
-                                <video
-                                    className="w-full h-full object-cover"
+                                <VideoWithPlaceholder
                                     src={content.suites[suite.id].headerVideo}
+                                    containerClassName="w-full h-full"
+                                    className="w-full h-full object-cover"
                                     controls
                                     playsInline
                                 />
@@ -188,19 +190,22 @@ const OfferExpandedView = ({ suite, onClose }) => {
 
                         <div className={`grid grid-cols-1 md:grid-cols-2 gap-5 ${(expandedContent.poweredBy || []).length === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3'}`}>
                             {/* Suite Containers */}
-                            {(expandedContent.poweredBy || []).map((suiteId) => {
-                                const suiteData = suites.find(s => s.id === suiteId);
-                                if (!suiteData) return null;
+                            {(expandedContent.poweredBy || []).map((item) => {
+                                const suiteId = typeof item === 'string' ? item : item.id;
+                                const originalSuite = suites.find(s => s.id === suiteId);
+                                if (!originalSuite) return null;
+
+                                const suiteData = typeof item === 'string' ? originalSuite : { ...originalSuite, ...item };
 
                                 return (
                                     <div
                                         key={suiteId}
-                                        className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/suite overflow-hidden"
+                                        className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/suite overflow-hidden flex flex-col justify-center min-h-[280px]"
                                     >
 
 
-                                        <div className="">
-                                            <div className="flex items-center gap-3 mb-2">
+                                        <div className="flex flex-col justify-center h-full">
+                                            <div className="flex items-center gap-3 mb-4">
                                                 <h4 className="text-3xl font-bold text-flo-orange group-hover/suite:text-flo-orange transition-colors">
                                                     {suiteData.title}
                                                 </h4>
@@ -218,6 +223,60 @@ const OfferExpandedView = ({ suite, onClose }) => {
                                     </div>
                                 );
                             })}
+
+                            {/* Flo OS Extra Row */}
+                            {isFloOS && (
+                                <>
+                                    {/* EZReview */}
+                                    <div className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/extra overflow-hidden flex flex-col justify-center min-h-[280px]">
+                                        <div className="flex flex-col justify-center h-full">
+                                            <div className="flex items-center gap-2 mb-4 w-full">
+                                                <h4 className="text-3xl font-bold text-flo-orange group-hover/extra:text-flo-orange transition-colors">
+                                                    EZ
+                                                </h4>
+                                                <span className="text-3xl font-black text-transparent font-outline-2" style={{ WebkitTextStroke: '1px #FFFFFF' }}>
+                                                    Review
+                                                </span>
+                                            </div>
+                                            <p className="text-lg uppercase text-white">
+                                                REPUTATION MANAGEMENT
+                                            </p>
+                                            <p className="text-neutral-600 mt-1 leading-relaxed pt-1 group-hover/extra:text-white transition-colors duration-300">
+                                                Automated reputation management system that captures 5-star Google reviews on autopilot. Build trust and rank higher without lifting a finger.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Connex - Logo Only */}
+                                    <div className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/extra overflow-hidden flex items-center justify-center min-h-[280px]">
+                                        <img
+                                            src="/assets/Connex2.png"
+                                            alt="Connex"
+                                            className="h-20 md:h-24 w-auto opacity-95 group-hover/extra:opacity-100"
+                                        />
+                                    </div>
+
+                                    {/* AI Automation */}
+                                    <div className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/extra overflow-hidden flex flex-col justify-center min-h-[280px]">
+                                        <div className="flex flex-col justify-center h-full">
+                                            <div className="flex items-center gap-2 mb-4 w-full">
+                                                <h4 className="text-3xl font-bold text-flo-orange group-hover/extra:text-flo-orange transition-colors">
+                                                    AI
+                                                </h4>
+                                                <span className="text-3xl font-black text-transparent font-outline-2" style={{ WebkitTextStroke: '1px #FFFFFF' }}>
+                                                    Automation
+                                                </span>
+                                            </div>
+                                            <p className="text-lg uppercase text-white">
+                                                BUSINESS AUTOMATION
+                                            </p>
+                                            <p className="text-neutral-600 mt-1 leading-relaxed pt-1 group-hover/extra:text-white transition-colors duration-300">
+                                                Custom operational workflows that eliminate manual tasks. We build intelligent agents and integrations to streamline your entire business backend.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </motion.div>
 

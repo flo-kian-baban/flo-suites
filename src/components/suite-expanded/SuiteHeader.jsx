@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
+import VideoWithPlaceholder from '../VideoWithPlaceholder';
 
 const SuiteHeader = ({ title, tagline, summary, outcomes, videoUrl }) => {
     return (
@@ -41,8 +42,9 @@ const SuiteHeader = ({ title, tagline, summary, outcomes, videoUrl }) => {
             {/* Video Column */}
             {videoUrl && (
                 <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black">
-                    <video
+                    <VideoWithPlaceholder
                         src={videoUrl}
+                        containerClassName="w-full h-full"
                         className="w-full h-full object-cover"
                         autoPlay
                         loop

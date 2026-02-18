@@ -464,21 +464,7 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
                                         </div>
                                     </div>
 
-                                    {/* Sticky Footer CTA */}
-                                    <div className={`p-6 border-t border-white/10 bg-black shrink-0`}>
-                                        <div className="max-w-3xl mx-auto flex items-center justify-between gap-4">
-                                            <div className="flex items-center gap-4 w-full">
-                                                <button className="flex-1 h-12 bg-flo-orange hover:bg-[#FF8559] text-white rounded-xl font-semibold shadow-lg shadow-flo-orange/20 hover:shadow-flo-orange/40 active:scale-[0.98] smooth-transition flex items-center justify-center gap-2">
-                                                    <span>{suite.primaryCTA.label}</span>
-                                                    <ArrowRight className="w-4 h-4" />
-                                                </button>
-                                                <button className={`flex-1 h-12 rounded-xl font-medium flex items-center justify-center gap-2 smooth-transition bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 text-white`}>
-                                                    <span>{suite.secondaryCTA.label}</span>
-                                                    <ExternalLink className="w-4 h-4 text-neutral-400" />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </>
                             )}
                         </motion.div>
