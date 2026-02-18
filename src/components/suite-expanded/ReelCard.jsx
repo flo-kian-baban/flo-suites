@@ -94,7 +94,8 @@ const ReelCard = ({ reel, isHovered, onMouseEnter, onMouseLeave }) => {
                 <VideoWithPlaceholder
                     ref={videoRef}
                     src={reel.videoUrl}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    containerClassName="absolute inset-0 w-full h-full"
+                    className="w-full h-full object-cover"
                     muted
                     loop
                     playsInline
