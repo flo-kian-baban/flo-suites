@@ -17,7 +17,6 @@ import StudioBookingSection from './StudioBookingSection';
 import SuiteCTA from './SuiteCTA';
 import KnowledgeGrid from './KnowledgeGrid';
 import { usePosts } from '@/hooks/usePosts';
-import { useSiteContent } from '@/hooks/useSiteContent';
 
 const SuiteExpandedLayout = ({ suite, onClose }) => {
     const { teamPage, title, expandedContent, id } = suite;

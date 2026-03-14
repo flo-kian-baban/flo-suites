@@ -5,7 +5,6 @@ import FloOSApplicationForm from './FloOSApplicationForm';
 import SuiteExpandedLayout from './suite-expanded/SuiteExpandedLayout';
 import TimelineSection from './suite-expanded/TimelineSection';
 import { suites } from '../data/suites';
-import { useSiteContent } from '../hooks/useSiteContent';
 import VideoWithPlaceholder from './VideoWithPlaceholder';
 import OfferChatPanel from './OfferChatPanel';
 
@@ -33,7 +32,6 @@ const SUITE_ICONS = {
 const OfferExpandedView = ({ suite, onClose }) => {
     const { expandedContent, teamPage } = suite;
     const [showApplicationForm, setShowApplicationForm] = useState(false);
-    const { content } = useSiteContent();
     const systemSectionRef = useRef(null);
     const scrollContainerRef = useRef(null);
 

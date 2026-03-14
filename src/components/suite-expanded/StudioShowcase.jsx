@@ -4,7 +4,6 @@ import { motion, LayoutGroup } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import ReelsGrid from './ReelsGrid';
 
-// Removes reliance on useSiteContent
 // Showcase content structure (static)
 const showcaseStatic = [
     {
