@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-import { useSiteContent } from '@/hooks/useSiteContent';
 import ReelCard from './ReelCard';
 
 // Gap between cards in pixels
@@ -10,8 +9,72 @@ const GAP = 12;
 const COLUMNS_VISIBLE = 3;
 
 const ReelsGrid = () => {
-    const { content } = useSiteContent();
-    const reelsData = content.studio?.reels || [];
+    const reelsData = [
+        {
+            id: 1,
+            title: 'Brand Reveal',
+            description: 'Cinematic brand identity unveiling for maximum impact.',
+            duration: '0:24',
+            poster: 'linear-gradient(135deg, #1a1a2e 0%, #e94560 100%)',
+            videoUrl: '/assets/media/studio/reels/reel-1-1770452555926.mp4'
+        },
+        {
+            id: 2,
+            title: 'Product Launch',
+            description: 'Dynamic product showcase with premium production quality.',
+            duration: '0:18',
+            poster: 'linear-gradient(135deg, #16213e 0%, #F1592D 100%)',
+            videoUrl: '/assets/media/studio/reels/reel-2-1770408370678.mp4'
+        },
+        {
+            id: 3,
+            title: 'BTS Session',
+            description: 'Behind-the-scenes look at our creative process.',
+            duration: '0:32',
+            poster: 'linear-gradient(135deg, #0f3460 0%, #533483 100%)',
+            videoUrl: '/assets/media/studio/reels/reel-3-1770417276088.mp4'
+        },
+        {
+            id: 4,
+            title: 'Client Story',
+            description: 'Authentic testimonial capturing real results.',
+            duration: '0:45',
+            poster: 'linear-gradient(135deg, #533483 0%, #e94560 100%)',
+            videoUrl: '/assets/media/studio/reels/reel-4-1770417358007.mp4'
+        },
+        {
+            id: 5,
+            title: 'Creative Process',
+            description: 'Deep dive into our ideation and execution workflow.',
+            duration: '0:28',
+            poster: 'linear-gradient(135deg, #e94560 0%, #ff7d55 100%)',
+            videoUrl: '/assets/media/studio/reels/reel-5-1770417483959.mp4'
+        },
+        {
+            id: 6,
+            title: 'Social Highlight',
+            description: 'Optimized vertical content for social platforms.',
+            duration: '0:15',
+            poster: 'linear-gradient(135deg, #F1592D 0%, #1a1a2e 100%)',
+            videoUrl: '/assets/media/studio/reels/reel-6-1770419067078.mp4'
+        },
+        {
+            id: 7,
+            title: 'Campaign Teaser',
+            description: 'High-energy preview building anticipation.',
+            duration: '0:21',
+            poster: 'linear-gradient(135deg, #ff7d55 0%, #16213e 100%)',
+            videoUrl: '/assets/media/studio/reels/reel-7-1770452348511.mp4'
+        },
+        {
+            id: 8,
+            title: 'Event Recap',
+            description: 'Highlights and key moments from live events.',
+            duration: '0:38',
+            poster: 'linear-gradient(135deg, #0f3460 0%, #F1592D 100%)',
+            videoUrl: '/assets/media/studio/reels/reel-8-1770452639407.mp4'
+        }
+    ];
     const [scrollIndex, setScrollIndex] = useState(0);
     const [hoveredId, setHoveredId] = useState(null);
 

@@ -14,9 +14,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Post } from '@/hooks/usePosts';
-import { Save, X, Plus, Trash2, Upload, Loader2, Image as ImageIcon, ChevronDown, ChevronUp } from 'lucide-react';
-import { uploadContentAsset } from '@/lib/content-manager';
-
+import { Save, X, Plus, Trash2, Image as ImageIcon, ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
 interface InlinePostFormProps {
     type: 'blog' | 'case_study';
     initialPost?: Post;
@@ -27,9 +25,7 @@ interface InlinePostFormProps {
 
 export default function InlinePostForm({ type, initialPost, onSave, onCancel, isNew = false }: InlinePostFormProps) {
     const [isSaving, setIsSaving] = useState(false);
-    const [isUploadingCover, setIsUploadingCover] = useState(false);
     const [showAdvanced, setShowAdvanced] = useState(false);
-    const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Form State
     const [formData, setFormData] = useState<Partial<Post>>({
@@ -63,26 +59,6 @@ export default function InlinePostForm({ type, initialPost, onSave, onCancel, is
             alert('Failed to save content');
         } finally {
             setIsSaving(false);
-        }
-    };
-
-    const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        setIsUploadingCover(true);
-        const path = `content/${type}/${formData.slug || 'untitled'}/cover-${Date.now()}.${file.name.split('.').pop()}`;
-
-        try {
-            const publicUrl = await uploadContentAsset(file, path);
-            if (publicUrl) {
-                setFormData(d => ({ ...d, cover_image: publicUrl }));
-            }
-        } catch (error) {
-            console.error('Upload failed:', error);
-            alert('Failed to upload cover image');
-        } finally {
-            setIsUploadingCover(false);
         }
     };
 
@@ -180,45 +156,20 @@ export default function InlinePostForm({ type, initialPost, onSave, onCancel, is
                         </div>
                     </div>
 
-                    {/* Right: Cover Image Upload */}
+                    {/* Right: Cover Image Settings */}
                     <div>
-                        <label className="block text-xs font-medium text-white/60 mb-2">Cover Image</label>
+                        <label className="block text-xs font-medium text-white/60 mb-2">Cover Image (URL or Gradient)</label>
                         <div
-                            className={`relative h-48 w-full rounded-xl border-2 border-dashed transition-all overflow-hidden cursor-pointer group ${formData.cover_image ? 'border-white/20' : 'border-white/10 hover:border-flo-orange/50 bg-white/5'
+                            className={`relative h-48 w-full rounded-xl border-2 border-dashed transition-all overflow-hidden ${formData.cover_image ? 'border-white/20' : 'border-white/10 bg-white/5'
                                 }`}
                             style={coverImageStyle}
-                            onClick={() => fileInputRef.current?.click()}
                         >
-                            {!formData.cover_image && !isUploadingCover && (
+                            {!formData.cover_image && (
                                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white/40">
                                     <ImageIcon className="w-10 h-10 mb-2" />
-                                    <span className="text-sm">Click to upload cover</span>
-                                    <span className="text-xs text-white/30 mt-1">or paste a gradient string</span>
+                                    <span className="text-sm">Paste a URL or gradient</span>
                                 </div>
                             )}
-
-                            {formData.cover_image && !isUploadingCover && (
-                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <div className="flex flex-col items-center text-white">
-                                        <Upload className="w-6 h-6 mb-1" />
-                                        <span className="text-xs">Replace image</span>
-                                    </div>
-                                </div>
-                            )}
-
-                            {isUploadingCover && (
-                                <div className="absolute inset-0 bg-black/70 flex items-center justify-center backdrop-blur-sm">
-                                    <Loader2 className="w-8 h-8 text-flo-orange animate-spin" />
-                                </div>
-                            )}
-
-                            <input
-                                ref={fileInputRef}
-                                type="file"
-                                accept="image/*"
-                                className="hidden"
-                                onChange={handleCoverUpload}
-                            />
                         </div>
 
                         {/* Manual URL/Gradient Input */}

@@ -8,6 +8,7 @@ export const suites = [
         gridArea: 'centerpiece',
         gridConfig: { rowStart: 1, rowSpan: 3, colStart: 1, colSpan: 5 },
         description: 'The central nervous system for your business. Flo OS connects strategy, content, and technology into a single, synchronized workflow that eliminates fragmentation.',
+        headerVideo: '/assets/media/content/suites/flo-os/header-1770405197179.mp4',
         deliverables: [
             'Unified business dashboard',
             'Real-time data synchronization',
@@ -142,6 +143,7 @@ export const suites = [
         gridArea: 'media-marketing',
         gridConfig: { rowStart: 4, rowSpan: 2, colStart: 1, colSpan: 2 },
         description: 'The ultimate growth engine. We combine high-velocity content production with scientific acquisition strategy to capture attention and convert it into revenue.',
+        headerVideo: '/assets/media/content/suites/media-marketing/header-1770406446641.mp4',
         deliverables: [
             'Performance creative production',
             'Integrated paid media strategy',
@@ -412,6 +414,7 @@ export const suites = [
         gridArea: 'funnel-builder',
         gridConfig: { rowStart: 4, rowSpan: 2, colStart: 3, colSpan: 3 },
         description: 'A dedicated service to build high-converting paths for specific offers. We design, build, and connect the entire journey from click to close.',
+        headerVideo: '/assets/media/content/suites/Funnel Builder/header-1773430712828.mp4',
         deliverables: [
             'Offer design & positioning',
             'Landing page architecture',

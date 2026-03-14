@@ -21,8 +21,7 @@ import { useSiteContent } from '@/hooks/useSiteContent';
 
 const SuiteExpandedLayout = ({ suite, onClose }) => {
     const { teamPage, title, expandedContent, id } = suite;
-    const { content } = useSiteContent();
-    const headerVideo = content.suites?.[id]?.headerVideo;
+    const headerVideo = suite.headerVideo;
 
 
 

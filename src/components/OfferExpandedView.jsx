@@ -162,12 +162,12 @@ const OfferExpandedView = ({ suite, onClose }) => {
                     {/* 2. Video Walkthrough + Chat Panel */}
                     <motion.div variants={itemVariants} className="flex flex-col md:flex-row gap-6 items-stretch">
                         {/* Video */}
-                        {content.suites?.[suite.id]?.headerVideo && (
+                        {suite.headerVideo && (
                             <div className="relative group flex-1 min-w-0">
                                 <div className="absolute -inset-1 bg-gradient-to-r from-flo-orange/20 to-transparent rounded-[2rem] blur opacity-25 group-hover:opacity-40 transition-opacity" />
                                 <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-black shadow-2xl">
                                     <VideoWithPlaceholder
-                                        src={content.suites[suite.id].headerVideo}
+                                        src={suite.headerVideo}
                                         containerClassName="w-full h-full"
                                         className="w-full h-full object-cover"
                                         controls

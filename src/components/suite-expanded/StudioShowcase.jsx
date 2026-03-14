@@ -4,8 +4,7 @@ import { motion, LayoutGroup } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import ReelsGrid from './ReelsGrid';
 
-import { useSiteContent } from '@/hooks/useSiteContent';
-
+// Removes reliance on useSiteContent
 // Showcase content structure (static)
 const showcaseStatic = [
     {
@@ -15,6 +14,7 @@ const showcaseStatic = [
         title: 'Production',
         description: 'From concept to camera. We capture the raw material that becomes your brand story.',
         poster: 'linear-gradient(135deg, #1a1a1a 0%, #F1592D 50%, #ff7d55 100%)',
+        videoSrc: '/assets/media/studio/showcase/capture-1770419179429.mp4',
     },
     {
         id: 'cut',
@@ -23,6 +23,7 @@ const showcaseStatic = [
         title: 'Post-Production',
         description: 'Precision editing, color grading, and motion design that elevates every frame.',
         poster: 'linear-gradient(135deg, #1a1a1a 0%, #F1592D 50%, #ff7d55 100%)',
+        videoSrc: '/assets/media/studio/showcase/cut-1770420550259.mp4',
     },
     {
         id: 'deploy',
@@ -31,6 +32,7 @@ const showcaseStatic = [
         title: 'Delivery',
         description: 'Multi-format export and seamless handoff across all platforms and channels.',
         poster: 'linear-gradient(135deg, #1a1a1a 0%, #F1592D 50%, #ff7d55 100%)',
+        videoSrc: '/assets/media/studio/showcase/deploy-1770829978943.mp4',
     }
 ];
 
@@ -43,7 +45,6 @@ const springTransition = {
 };
 
 const StudioShowcase = () => {
-    const { content } = useSiteContent();
     const [activeIndex, setActiveIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(true); // Autoplay by default
     const [isMuted, setIsMuted] = useState(true); // Muted by default
@@ -52,11 +53,8 @@ const StudioShowcase = () => {
     const videoRef = useRef(null);
     const inactiveVideoRefs = useRef({});
 
-    // Merge static structure with dynamic video URLs
-    const showcaseVideos = showcaseStatic.map(item => ({
-        ...item,
-        videoSrc: content.studio?.showcase?.[item.id] || null
-    }));
+    // Use static videos array instead of dynamically fetching from remote config
+    const showcaseVideos = showcaseStatic;
 
     // Progress bar update using interval for reliable updates
     useEffect(() => {
