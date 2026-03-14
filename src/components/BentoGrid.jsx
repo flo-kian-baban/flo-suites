@@ -65,7 +65,10 @@ const BentoGrid = ({ expandedSuite, onTileClick, onClose, tilesReady = true }) =
         if (id === 'media-marketing') return ['studio', 'marketing'];
         if (id === 'Funnel Builder') return ['studio', 'marketing', 'dev'];
         if (id === 'connex') return ['marketing', 'dev'];
-        if (id === 'flo-os') return suites.map(s => s.id).filter(sid => sid !== 'flo-os');
+        if (id === 'flo-os') {
+            const excludedIds = ['flo-os', 'brand-logos', 'about-flo', 'Funnel Builder', 'media-marketing', 'instagram', 'youtube', 'linkedin', 'facebook'];
+            return suites.map(s => s.id).filter(sid => !excludedIds.includes(sid));
+        }
         return [];
     };
 
@@ -100,7 +103,7 @@ const BentoGrid = ({ expandedSuite, onTileClick, onClose, tilesReady = true }) =
                     ease: [0.2, 0, 0, 1] // Aggressive push
                 }}
             >
-                {suites.map((suite, index) => {
+                {suites.filter(s => !s.archived).map((suite, index) => {
                     const isSelected = expandedSuite?.id === suite.id;
                     const isOtherSelected = isAnyExpanded && !isSelected;
                     const isHovered = hoveredId === suite.id;

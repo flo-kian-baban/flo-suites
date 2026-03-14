@@ -185,24 +185,23 @@ const ExpandedContent = ({ suite, onClose }) => {
                                         <div className="relative bg-white/5 rounded-2xl p-8 flex flex-col items-center text-center space-y-6 border border-white/10">
                                             <div className="space-y-3">
                                                 <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-                                                    Ready to Get Started?
+                                                    Currently at Capacity
                                                 </h3>
                                                 <p className="text-neutral-400 text-sm max-w-lg mx-auto leading-relaxed">
-                                                    If you're ready to deploy this system, take the first step and let's coordinate the implementation.
+                                                    We are not accepting new clients at the moment, but you can contact us to inquire about future availability.
                                                 </p>
                                             </div>
 
                                             <button
-                                                onClick={handlePrimaryAction}
-                                                className="group flex items-center gap-2 px-8 py-4 bg-flo-orange hover:bg-flo-orange-light rounded-xl font-bold text-white smooth-transition shadow-lg shadow-flo-orange/20"
+                                                disabled={true}
+                                                className="group flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/10 cursor-not-allowed rounded-xl font-bold text-white/40 smooth-transition"
                                             >
-                                                <span>{suite.primaryCTA.label}</span>
-                                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                                <span>Applications Closed</span>
                                             </button>
 
                                             <div className="flex items-center gap-2 text-[10px] font-bold text-white/20 uppercase tracking-[0.2em]">
-                                                <Sparkles className="w-3 h-3" />
-                                                <span>Application takes less than 2 minutes</span>
+                                                <Sparkles className="w-3 h-3 opacity-50" />
+                                                <span>Check back later or contact us</span>
                                             </div>
                                         </div>
                                     </div>
@@ -213,10 +212,10 @@ const ExpandedContent = ({ suite, onClose }) => {
                         {/* CTA Row */}
                         <div className="flex gap-4 mt-8 pt-8 border-t border-white/10 shrink-0">
                             <button
-                                onClick={handlePrimaryAction}
-                                className="flex-1 px-8 py-4 bg-flo-orange hover:bg-flo-orange-light rounded-xl font-bold text-white smooth-transition shadow-lg shadow-flo-orange/20 hover:shadow-flo-orange/40 transform hover:-translate-y-0.5"
+                                disabled={true}
+                                className="flex-1 px-8 py-4 bg-white/5 border border-white/10 cursor-not-allowed rounded-xl font-bold text-white/40 smooth-transition"
                             >
-                                {suite.primaryCTA.label}
+                                Applications Closed
                             </button>
                             <button className="px-8 py-4 glass-effect-light hover:bg-white/10 rounded-xl font-semibold text-white smooth-transition border border-white/10 hover:border-white/20">
                                 {suite.secondaryCTA.label}

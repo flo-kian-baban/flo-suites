@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { X, ArrowRight, CheckCircle2, Layers, Cpu, Palette, TrendingUp, Brain, Sparkles } from 'lucide-react';
+import { X, ArrowRight, CheckCircle2, Layers, Cpu, Camera, Code, Wifi, TrendingUp, Brain, Sparkles, SmartphoneNfc } from 'lucide-react';
 import FloOSApplicationForm from './FloOSApplicationForm';
 import SuiteExpandedLayout from './suite-expanded/SuiteExpandedLayout';
 import TimelineSection from './suite-expanded/TimelineSection';
@@ -18,9 +18,9 @@ const OFFER_KEY_MAP = {
 
 // Map suite IDs to icons for the "Powered By" section
 const SUITE_ICONS = {
-    'studio': Palette,
+    'studio': Camera,
     'marketing': TrendingUp,
-    'dev': Cpu,
+    'dev': Code,
     'about-flo': Brain,
     'consultation': Brain,
     'media-marketing': Layers
@@ -217,27 +217,37 @@ const OfferExpandedView = ({ suite, onClose }) => {
                                 if (!originalSuite) return null;
 
                                 const suiteData = typeof item === 'string' ? originalSuite : { ...originalSuite, ...item };
+                                const Icon = SUITE_ICONS[suiteId] || Sparkles;
 
                                 return (
                                     <div
                                         key={suiteId}
-                                        className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/suite overflow-hidden flex flex-col justify-center min-h-[280px]"
+                                        className="relative bg-[#0A0A0A]/50 backdrop-blur-xl border border-white/5 rounded-[2rem] p-8 hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500 group/suite overflow-hidden flex flex-col justify-start"
                                     >
+                                        {/* Hover Glow */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-flo-orange/0 to-transparent group-hover/suite:from-flo-orange/5 transition-colors duration-500 rounded-[2rem]" />
+                                        
+                                        {/* Top Accent Line */}
+                                        <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/10 group-hover/suite:via-flo-orange/20 to-transparent transition-colors duration-500" />
 
-
-                                        <div className="flex flex-col justify-center h-full">
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <h4 className="text-3xl font-bold text-flo-orange group-hover/suite:text-flo-orange transition-colors">
+                                        {/* Header */}
+                                        <div className="relative z-10 flex items-center gap-4 mb-2">
+                                            <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center shrink-0 group-hover/suite:scale-110 group-hover/suite:bg-flo-orange/10 group-hover/suite:border-flo-orange/20 transition-all duration-500">
+                                                <Icon className="w-6 h-6 text-white/50 group-hover/suite:text-flo-orange transition-colors duration-500" />
+                                            </div>
+                                            <div>
+                                                <h4 className="text-2xl sm:text-3xl font-bold tracking-tight text-white group-hover/suite:text-flo-orange transition-colors duration-500 block leading-tight">
                                                     {suiteData.title}
                                                 </h4>
-                                                <span className="text-3xl font-black tracking-widest text-transparent font-outline-2" style={{ WebkitTextStroke: '1px #FFFFFF' }}>
-                                                    SUITE
-                                                </span>
+                                                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-flo-orange/80 mt-1">
+                                                    {suiteData.tagline}
+                                                </p>
                                             </div>
-                                            <p className="text-lg uppercase text-white">
-                                                {suiteData.tagline}
-                                            </p>
-                                            <p className="text-neutral-600 mt-1 leading-relaxed pt-1 group-hover/suite:text-white transition-colors duration-300">
+                                        </div>
+
+                                        {/* Bottom Content border top divider */}
+                                        <div className="relative z-10 pt-4 mt-2 border-t border-white/5 group-hover/suite:border-white/10 transition-colors duration-500">
+                                            <p className="text-sm text-neutral-400 group-hover/suite:text-neutral-300 leading-relaxed transition-colors duration-500">
                                                 {suiteData.description}
                                             </p>
                                         </div>
@@ -249,49 +259,76 @@ const OfferExpandedView = ({ suite, onClose }) => {
                             {isFloOS && (
                                 <>
                                     {/* EZReview */}
-                                    <div className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/extra overflow-hidden flex flex-col justify-center min-h-[280px]">
-                                        <div className="flex flex-col justify-center h-full">
-                                            <div className="flex items-center gap-2 mb-4 w-full">
-                                                <h4 className="text-3xl font-bold text-flo-orange group-hover/extra:text-flo-orange transition-colors">
-                                                    EZ
-                                                </h4>
-                                                <span className="text-3xl font-black text-transparent font-outline-2" style={{ WebkitTextStroke: '1px #FFFFFF' }}>
-                                                    Review
-                                                </span>
+                                    <div className="relative bg-[#0A0A0A]/50 backdrop-blur-xl border border-white/5 rounded-[2rem] p-8 hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500 group/extra overflow-hidden flex flex-col justify-start">
+                                        {/* Hover Glow */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-flo-orange/0 to-transparent group-hover/extra:from-flo-orange/5 transition-colors duration-500 rounded-[2rem]" />
+                                        
+                                        {/* Top Accent Line */}
+                                        <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/10 group-hover/extra:via-flo-orange/20 to-transparent transition-colors duration-500" />
+
+                                        {/* Header */}
+                                        <div className="relative z-10 flex items-center gap-4 mb-2">
+                                            <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center shrink-0 group-hover/extra:scale-110 group-hover/extra:bg-flo-orange/10 group-hover/extra:border-flo-orange/20 transition-all duration-500">
+                                                <SmartphoneNfc className="w-6 h-6 text-white/50 group-hover/extra:text-flo-orange transition-colors duration-500" />
                                             </div>
-                                            <p className="text-lg uppercase text-white">
-                                                REPUTATION MANAGEMENT
-                                            </p>
-                                            <p className="text-neutral-600 mt-1 leading-relaxed pt-1 group-hover/extra:text-white transition-colors duration-300">
+                                            <div>
+                                                <h4 className="text-2xl sm:text-3xl font-bold tracking-tight text-white group-hover/extra:text-flo-orange transition-colors duration-500 block leading-tight">
+                                                    EZ Info
+                                                </h4>
+                                                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-flo-orange/80 mt-1">
+                                                    REPUTATION MANAGEMENT
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Bottom Content border top divider */}
+                                        <div className="relative z-10 pt-4 mt-2 border-t border-white/5 group-hover/extra:border-white/10 transition-colors duration-500">
+                                            <p className="text-sm text-neutral-400 group-hover/extra:text-neutral-300 leading-relaxed transition-colors duration-500">
                                                 Automated reputation management system that captures 5-star Google reviews on autopilot. Build trust and rank higher without lifting a finger.
                                             </p>
                                         </div>
                                     </div>
 
                                     {/* Connex - Logo Only */}
-                                    <div className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/extra overflow-hidden flex items-center justify-center min-h-[280px]">
-                                        <img
-                                            src="/assets/Connex2.png"
-                                            alt="Connex"
-                                            className="h-20 md:h-24 w-auto opacity-95 group-hover/extra:opacity-100"
-                                        />
+                                    <div className="relative bg-[#0A0A0A]/50 backdrop-blur-xl border border-white/5 rounded-[2rem] p-8 hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500 group/extra overflow-hidden flex flex-col items-center justify-center min-h-[160px]">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-flo-orange/0 to-transparent group-hover/extra:from-flo-orange/5 transition-colors duration-500 rounded-[2rem]" />
+                                        <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/10 group-hover/extra:via-flo-orange/20 to-transparent transition-colors duration-500" />
+                                        
+                                        <div className="relative z-10 flex flex-col items-center justify-center h-full w-full">
+                                            <img
+                                                src="/assets/Connex2.png"
+                                                alt="Connex"
+                                                className="h-16 md:h-20 w-auto opacity-70 group-hover/extra:opacity-100 group-hover/extra:scale-105 transition-all duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover/extra:drop-shadow-[0_0_25px_rgba(241,89,45,0.3)]"
+                                            />
+                                        </div>
                                     </div>
 
                                     {/* AI Automation */}
-                                    <div className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-7 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300 group/extra overflow-hidden flex flex-col justify-center min-h-[280px]">
-                                        <div className="flex flex-col justify-center h-full">
-                                            <div className="flex items-center gap-2 mb-4 w-full">
-                                                <h4 className="text-3xl font-bold text-flo-orange group-hover/extra:text-flo-orange transition-colors">
-                                                    AI
-                                                </h4>
-                                                <span className="text-3xl font-black text-transparent font-outline-2" style={{ WebkitTextStroke: '1px #FFFFFF' }}>
-                                                    Automation
-                                                </span>
+                                    <div className="relative bg-[#0A0A0A]/50 backdrop-blur-xl border border-white/5 rounded-[2rem] p-8 hover:bg-white/[0.03] hover:border-white/10 transition-all duration-500 group/extra overflow-hidden flex flex-col justify-start">
+                                        {/* Hover Glow */}
+                                        <div className="absolute inset-0 bg-gradient-to-br from-flo-orange/0 to-transparent group-hover/extra:from-flo-orange/5 transition-colors duration-500 rounded-[2rem]" />
+                                        
+                                        {/* Top Accent Line */}
+                                        <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-white/10 group-hover/extra:via-flo-orange/20 to-transparent transition-colors duration-500" />
+
+                                        {/* Header */}
+                                        <div className="relative z-10 flex items-center gap-4 mb-2">
+                                            <div className="w-12 h-12 rounded-2xl bg-white/[0.03] border border-white/5 flex items-center justify-center shrink-0 group-hover/extra:scale-110 group-hover/extra:bg-flo-orange/10 group-hover/extra:border-flo-orange/20 transition-all duration-500">
+                                                <Cpu className="w-6 h-6 text-white/50 group-hover/extra:text-flo-orange transition-colors duration-500" />
                                             </div>
-                                            <p className="text-lg uppercase text-white">
-                                                BUSINESS AUTOMATION
-                                            </p>
-                                            <p className="text-neutral-600 mt-1 leading-relaxed pt-1 group-hover/extra:text-white transition-colors duration-300">
+                                            <div>
+                                                <h4 className="text-2xl sm:text-3xl font-bold tracking-tight text-white group-hover/extra:text-flo-orange transition-colors duration-500 block leading-tight">
+                                                    AI Automation
+                                                </h4>
+                                                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-flo-orange/80 mt-1">
+                                                    BUSINESS AUTOMATION
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Bottom Content border top divider */}
+                                        <div className="relative z-10 pt-4 mt-2 border-t border-white/5 group-hover/extra:border-white/10 transition-colors duration-500">
+                                            <p className="text-sm text-neutral-400 group-hover/extra:text-neutral-300 leading-relaxed transition-colors duration-500">
                                                 Custom operational workflows that eliminate manual tasks. We build intelligent agents and integrations to streamline your entire business backend.
                                             </p>
                                         </div>
@@ -312,27 +349,26 @@ const OfferExpandedView = ({ suite, onClose }) => {
                         variants={itemVariants}
                         className="relative overflow-hidden rounded-[2.5rem] p-1 shadow-2xl"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-flo-orange/40 via-flo-orange/10 to-transparent opacity-50" />
-                        <div className="relative bg-[#0d0d0d] rounded-[2.4rem] p-10 md:p-14 flex flex-col items-center text-center space-y-10 border border-white/10">
+                        {/* Premium disabled gradient background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] via-transparent to-transparent opacity-50" />
+                        <div className="relative bg-[#0a0a0a] rounded-[2.4rem] p-10 md:p-14 flex flex-col items-center text-center space-y-10 border border-white/10">
                             <div className="space-y-4 max-w-2xl">
                                 <h3 className="text-3xl md:text-5xl font-black text-white tracking-tight whitespace-nowrap">
-                                    Ready to {isFloOS ? 'Initialize Flo OS' : isFunnelBuilder ? 'Build Your Machine' : isMediaMarketing ? 'Scale Your Momentum' : suite.primaryCTA.label}?
+                                    Currently at Capacity.
                                 </h3>
                                 <p className="text-lg text-neutral-400 font-medium leading-relaxed">
-                                    Skip the deliverables list. If you're here, you're ready for {isFloOS ? 'total operational synchronization' : 'unignorable market presence'}. Take the first step.
+                                    We are not accepting new clients at the moment, but you can explore the system or contact us to inquire about future availability.
                                 </p>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg">
                                 <button
-                                    onClick={() => (isFloOS || isFunnelBuilder || isMediaMarketing) && setShowApplicationForm(true)}
-                                    className="group relative h-14 px-6 bg-flo-orange rounded-xl font-bold text-white shadow-[0_8px_30px_-6px_rgba(241,89,45,0.45)] hover:shadow-[0_12px_40px_-6px_rgba(241,89,45,0.55)] transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
+                                    disabled={true}
+                                    className="group relative h-14 px-6 bg-white/5 border border-white/10 cursor-not-allowed rounded-xl font-bold text-white/40 transition-all duration-300"
                                 >
                                     <span className="relative z-10 flex items-center justify-center gap-2.5">
-                                        {isFloOS ? 'Begin Initialization' : isFunnelBuilder ? 'Build My System' : isMediaMarketing ? 'Start Growth Engine' : suite.primaryCTA.label}
-                                        <ArrowRight className="w-4.5 h-4.5 group-hover:translate-x-0.5 transition-transform" />
+                                        Applications Closed
                                     </span>
-                                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity rounded-xl" />
                                 </button>
                                 <button
                                     onClick={scrollToSystem}
@@ -343,8 +379,8 @@ const OfferExpandedView = ({ suite, onClose }) => {
                             </div>
 
                             <div className="flex items-center gap-2 text-[10px] font-bold text-white/25 uppercase tracking-[0.25em]">
-                                <Sparkles className="w-3 h-3" />
-                                <span>Takes less than 2 minutes</span>
+                                <Sparkles className="w-3 h-3 opacity-50" />
+                                <span>Check back later or contact us directly</span>
                             </div>
                         </div>
                     </motion.div>
@@ -449,7 +485,7 @@ const OfferExpandedView = ({ suite, onClose }) => {
             >
                 <div className="max-w-7xl mx-auto flex items-center justify-between gap-6">
                     <p className="hidden md:block text-sm text-neutral-500 font-medium">
-                        Ready to deploy this system?
+                        Currently at Capacity
                     </p>
                     <div className="flex items-center gap-3 w-full md:w-auto">
                         <button
@@ -459,15 +495,10 @@ const OfferExpandedView = ({ suite, onClose }) => {
                             {isFloOS ? 'Explore The System' : isFunnelBuilder ? 'See The Process' : 'See How It Works'}
                         </button>
                         <button
-                            onClick={() => (isFloOS || isFunnelBuilder || isMediaMarketing) && setShowApplicationForm(true)}
-                            className="flex-1 md:flex-none h-11 px-6 bg-flo-orange hover:bg-[#FF8559] text-white rounded-xl font-bold text-sm shadow-[0_4px_20px_-4px_rgba(241,89,45,0.4)] hover:shadow-[0_6px_24px_-4px_rgba(241,89,45,0.5)] transition-all duration-300 flex items-center justify-center gap-2"
+                            disabled={true}
+                            className="flex-1 md:flex-none h-11 px-6 bg-white/5 border border-white/10 text-white/40 cursor-not-allowed rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2"
                         >
-                            <span>
-                                {isFloOS ? 'Apply for Flo OS' :
-                                    isFunnelBuilder ? 'Build It' :
-                                        suite.primaryCTA.label}
-                            </span>
-                            <ArrowRight className="w-4 h-4" />
+                            <span>Applications Closed</span>
                         </button>
                     </div>
                 </div>

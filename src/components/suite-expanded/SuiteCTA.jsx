@@ -25,9 +25,8 @@ const SuiteCTA = ({ suiteName, suiteId }) => {
                     )}
 
                     {/* Primary CTA — always shown */}
-                    <button className={`${isStudio ? '' : 'flex-1 md:flex-none'} px-8 py-3.5 bg-flo-orange hover:bg-[#FF8559] text-white rounded-xl font-bold shadow-lg shadow-flo-orange/25 hover:shadow-flo-orange/40 transition-all flex items-center justify-center gap-2`}>
-                        <span>Work with {suiteName}</span>
-                        <ArrowRight className="w-4 h-4" />
+                    <button disabled={true} className={`${isStudio ? '' : 'flex-1 md:flex-none'} px-8 py-3.5 bg-white/5 border border-white/10 cursor-not-allowed text-white/40 rounded-xl font-bold transition-all flex items-center justify-center gap-2`}>
+                        <span>At Capacity</span>
                     </button>
                 </div>
             </div>

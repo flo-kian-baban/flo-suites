@@ -6,7 +6,7 @@ export const suites = [
         tagline: 'Integrated Operating System',
         isCenterpiece: true,
         gridArea: 'centerpiece',
-        gridConfig: { rowStart: 1, rowSpan: 4, colStart: 1, colSpan: 4 },
+        gridConfig: { rowStart: 1, rowSpan: 3, colStart: 1, colSpan: 5 },
         description: 'The central nervous system for your business. Flo OS connects strategy, content, and technology into a single, synchronized workflow that eliminates fragmentation.',
         deliverables: [
             'Unified business dashboard',
@@ -49,13 +49,13 @@ export const suites = [
                     title: "Architecture",
                     timeframe: "Month 1",
                     desc: "Business positioning, offer clarity, messaging alignment, and growth priorities.",
-                    detail: "We start by establishing the foundation—understanding your market position, clarifying your core offers, and defining the strategic priorities that will drive sustainable growth."
+                    detail: "We start by establishing the foundation, understanding your market position, clarifying your core offers, and defining the strategic priorities that will drive sustainable growth."
                 },
                 {
                     title: "System Activation",
                     timeframe: "Month 2",
                     desc: "Content systems, funnel systems, distribution logic, and operational workflows.",
-                    detail: "With clarity established, we build and activate the interconnected systems that execute your strategy—content production, conversion funnels, distribution channels, and the workflows that keep everything running."
+                    detail: "With clarity established, we build and activate the interconnected systems that execute your strategy; content production, conversion funnels, distribution channels, and the workflows that keep everything running."
                 },
                 {
                     title: "Optimization & Compounding",
@@ -103,7 +103,7 @@ export const suites = [
                     step: "Activate",
                     title: "Activate",
                     timeframe: "Month 2",
-                    description: "Connecting the systems—content, funnel, and operations—into one synchronized engine."
+                    description: "Connecting the systems, content, funnel, and operations, into one synchronized engine."
                 },
                 {
                     step: "Amplify",
@@ -115,7 +115,7 @@ export const suites = [
             investment: {
                 label: "Strategic Investment",
                 title: "Operation System",
-                price: "$2,500",
+                price: "$4,500",
                 description: "Initial commitment for baseline system architecture."
             },
             valueDelivered: {
@@ -140,7 +140,7 @@ export const suites = [
         type: 'offer',
         tagline: 'Content + Distribution Engine',
         gridArea: 'media-marketing',
-        gridConfig: { rowStart: 1, rowSpan: 4, colStart: 5, colSpan: 3 },
+        gridConfig: { rowStart: 4, rowSpan: 2, colStart: 1, colSpan: 2 },
         description: 'The ultimate growth engine. We combine high-velocity content production with scientific acquisition strategy to capture attention and convert it into revenue.',
         deliverables: [
             'Performance creative production',
@@ -183,7 +183,7 @@ export const suites = [
                     title: "Content Planning",
                     timeframe: "Monthly Cycle",
                     desc: "Themes, angles, messaging alignment, and performance targets.",
-                    detail: "Each month begins with strategic planning—identifying content themes, messaging angles, and setting clear performance benchmarks aligned with your brand."
+                    detail: "Each month begins with strategic planning, identifying content themes, messaging angles, and setting clear performance benchmarks aligned with your brand."
                 },
                 {
                     title: "Production",
@@ -248,7 +248,7 @@ export const suites = [
             investment: {
                 label: "Engagement Investment",
                 title: "Media Marketing",
-                price: "$800",
+                price: "$1,200",
                 description: "Ongoing high-velocity execution for mass visibility."
             },
             valueDelivered: {
@@ -332,7 +332,7 @@ export const suites = [
         title: 'Marketing',
         tagline: 'Scientific Growth Strategy',
         gridArea: 'marketing',
-        gridConfig: { rowStart: 3, rowSpan: 2, colStart: 10, colSpan: 3 },
+        gridConfig: { rowStart: 3, rowSpan: 2, colStart: 9, colSpan: 4 },
         description: 'We replace guesswork with engineering. A data-first approach to acquisition, retention, and scaling your revenue through paid and organic channels.',
         deliverables: [
             'Paid acquisition (Social/Search)',
@@ -367,11 +367,11 @@ export const suites = [
                 },
                 {
                     title: "Target Audience",
-                    description: "Identify who we're targeting, why they care, and what triggers action — then build the campaign around that."
+                    description: "Identify who we're targeting, why they care, and what triggers action, then build the campaign around that."
                 },
                 {
                     title: "Execution Quality",
-                    description: "Studio delivers premium content. Development builds fast, high-trust pages — so the marketing actually performs."
+                    description: "Studio delivers premium content. Development builds fast, high-trust pages, so the marketing actually performs."
                 }
             ],
             process: [
@@ -389,17 +389,17 @@ export const suites = [
                 {
                     title: "COP",
                     subtitle: "Client Operating Profile",
-                    description: "Capture the business reality — offers, goals, audience, constraints, and current gaps."
+                    description: "Capture the business reality; offers, goals, audience, constraints, and current gaps."
                 },
                 {
                     title: "MCI",
                     subtitle: "Market & Competitive Intelligence",
-                    description: "Map the market — competitors, positioning angles, demand signals, and what wins attention."
+                    description: "Map the market; competitors, positioning angles, demand signals, and what wins attention."
                 },
                 {
                     title: "SB",
                     subtitle: "System Blueprint",
-                    description: "Turn strategy into execution — the campaign system, assets, and rollout plan across suites."
+                    description: "Turn strategy into execution; the campaign system, assets, and rollout plan across suites."
                 }
             ]
         }
@@ -410,7 +410,7 @@ export const suites = [
         type: 'offer',
         tagline: 'Outcome-driven campaigns.',
         gridArea: 'funnel-builder',
-        gridConfig: { rowStart: 3, rowSpan: 2, colStart: 8, colSpan: 2 },
+        gridConfig: { rowStart: 4, rowSpan: 2, colStart: 3, colSpan: 3 },
         description: 'A dedicated service to build high-converting paths for specific offers. We design, build, and connect the entire journey from click to close.',
         deliverables: [
             'Offer design & positioning',
@@ -453,7 +453,7 @@ export const suites = [
                     title: "Offer Definition",
                     timeframe: "Week 1",
                     desc: "Goal clarity, conversion intent, and target audience alignment.",
-                    detail: "We start by crystallizing your offer and defining the exact outcome you want—whether that's leads, sales, registrations, or another measurable action."
+                    detail: "We start by crystallizing your offer and defining the exact outcome you want, whether that's leads, sales, registrations, or another measurable action."
                 },
                 {
                     title: "Journey Design",
@@ -465,7 +465,7 @@ export const suites = [
                     title: "Build & Connect",
                     timeframe: "Week 3-4",
                     desc: "Landing experiences, creative assets, tracking, and automation logic.",
-                    detail: "Our team builds the complete conversion infrastructure—landing pages, email sequences, creative assets, tracking systems, and automation—all connected and optimized for results."
+                    detail: "Our team builds the complete conversion infrastructure: landing pages, email sequences, creative assets, tracking systems, and automation, all connected and optimized for results."
                 }
             ],
 
@@ -519,7 +519,7 @@ export const suites = [
             investment: {
                 label: "Strategic Investment",
                 title: "Funnel Builder",
-                price: "$1600",
+                price: "$2,600",
                 description: "Single-campaign conversion infrastructure build."
             },
             valueDelivered: {
@@ -541,9 +541,9 @@ export const suites = [
     {
         id: 'connex',
         title: 'Connex',
-        tagline: 'Stay Tuned',
+        tagline: 'April 8',
         gridArea: 'connex',
-        gridConfig: { rowStart: 5, rowSpan: 4, colStart: 1, colSpan: 4 },
+        gridConfig: { rowStart: 3, rowSpan: 3, colStart: 6, colSpan: 3 },
         description: 'The distribution layer. We connect your brand with a curated network of creators and influencers to drive authentic, organic reach at scale.',
         deliverables: [
             'Creator partnership management',
@@ -567,7 +567,7 @@ export const suites = [
         title: 'About Flo',
         tagline: 'Ask anything about Flo.',
         gridArea: 'about-flo',
-        gridConfig: { rowStart: 5, rowSpan: 4, colStart: 5, colSpan: 4 },
+        gridConfig: { rowStart: 6, rowSpan: 3, colStart: 5, colSpan: 4 },
         description: 'Your personal guide to understanding Flo. Ask questions, explore our philosophy, and see how we can help you grow.',
         primaryCTA: {
             label: 'Chat with Flo',
@@ -637,5 +637,65 @@ export const suites = [
                 tools: ["React/Next.js", "Tailwind", "Node.js", "GoHighLevel"]
             }
         }
+    },
+    {
+        id: 'ez-info',
+        title: 'EZInfo',
+        type: 'product',
+        tagline: 'May 1',
+        gridArea: 'ez-info',
+        gridConfig: { rowStart: 1, rowSpan: 2, colStart: 6, colSpan: 2 },
+        description: 'A new product we are building to streamline information. More details coming soon.',
+        bestFor: ['Productivity', 'Research', 'Organization'],
+        primaryCTA: {
+            label: 'Learn More',
+            action: 'apply'
+        }
+    },
+    {
+        id: 'instagram',
+        title: 'Instagram',
+        type: 'social',
+        url: 'https://instagram.com/flo',
+        gridArea: 'social-1',
+        gridConfig: { rowStart: 8, rowSpan: 1, colStart: 1, colSpan: 1 }
+    },
+    {
+        id: 'youtube',
+        title: 'YouTube',
+        type: 'social',
+        url: 'https://youtube.com/@flo',
+        gridArea: 'social-2',
+        gridConfig: { rowStart: 8, rowSpan: 1, colStart: 2, colSpan: 1 }
+    },
+    {
+        id: 'linkedin',
+        title: 'LinkedIn',
+        type: 'social',
+        url: 'https://linkedin.com/company/flo',
+        gridArea: 'social-3',
+        gridConfig: { rowStart: 8, rowSpan: 1, colStart: 3, colSpan: 1 }
+    },
+    {
+        id: 'facebook',
+        title: 'Facebook',
+        type: 'social',
+        url: 'https://facebook.com/flo',
+        gridArea: 'social-4',
+        gridConfig: { rowStart: 8, rowSpan: 1, colStart: 4, colSpan: 1 }
+    },
+    {
+        id: 'brand-logos',
+        type: 'logo-scroll',
+        gridArea: 'brand-logos',
+        gridConfig: { rowStart: 6, rowSpan: 2, colStart: 1, colSpan: 4 },
+        brands: [
+            '/assets/logos/logo-1.png',
+            '/assets/logos/logo-2.png',
+            '/assets/logos/logo-3.png',
+            '/assets/logos/logo-4.png',
+            '/assets/logos/logo-5.png',
+            '/assets/logos/logo-6.png'
+        ]
     }
 ];

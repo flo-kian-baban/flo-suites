@@ -7,7 +7,7 @@ export const marketingArticles = [
         readingTime: '5 min',
         category: 'Strategy',
         body: {
-            intro: 'Most companies approach growth as a series of isolated experiments—a new ad here, an influencer campaign there. But true scale comes from understanding the fundamental equation of your business.',
+            intro: 'Most companies approach growth as a series of isolated experiments: a new ad here, an influencer campaign there. But true scale comes from understanding the fundamental equation of your business.',
             sections: [
                 {
                     heading: 'The Three Levers of Growth',

@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Public read for site_config and posts
+    match /site_config/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && (request.auth.token.email.matches('.*@flosuites\\.ca$') || request.auth.token.email.matches('.*@flosuites\\.com$'));
+    }
+    match /posts/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null && (request.auth.token.email.matches('.*@flosuites\\.ca$') || request.auth.token.email.matches('.*@flosuites\\.com$'));
+    }
+    // Applications: public write (form submissions), admin read/write
+    match /applications/{doc} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null && (request.auth.token.email.matches('.*@flosuites\\.ca$') || request.auth.token.email.matches('.*@flosuites\\.com$'));
+    }
+  }
+}

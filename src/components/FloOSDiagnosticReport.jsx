@@ -154,7 +154,7 @@ const SYSTEM_AREAS = {
         frictionTitle: 'Unclear market positioning',
         frictionReason: 'Your brand lacks the differentiation needed to stand out in a crowded market.',
         opportunityTitle: 'Brand Positioning Refinement',
-        opportunityWhy: 'Your positioning has room to sharpen—messaging that resonates drives higher conversion.',
+        opportunityWhy: 'Your positioning has room to sharpen; messaging that resonates drives higher conversion.',
         opportunityUnlock: 'Clearer differentiation, stronger resonance with ideal clients',
         leverageTitle: 'Brand Authority Amplification',
         leverageWhy: 'Your strong positioning is an asset ready to be leveraged at scale.',
@@ -167,10 +167,10 @@ const SYSTEM_AREAS = {
         frictionTitle: 'Inconsistent content output',
         frictionReason: 'Sporadic content is limiting audience trust and authority-building.',
         opportunityTitle: 'Content System Activation',
-        opportunityWhy: 'Your content has potential—a structured system will multiply its impact.',
+        opportunityWhy: 'Your content has potential; a structured system will multiply its impact.',
         opportunityUnlock: 'Predictable audience growth, compounding organic reach',
         leverageTitle: 'Content Engine Scaling',
-        leverageWhy: 'Your content engine is working—time to amplify distribution.',
+        leverageWhy: "Your content engine is working, so it's time to amplify distribution.",
         leverageUnlock: 'Scaled authority, multi-channel presence',
         team: 'studio',
         relatedGoals: ['build-authority', 'stabilize-leads']
@@ -180,10 +180,10 @@ const SYSTEM_AREAS = {
         frictionTitle: 'Unpredictable lead flow',
         frictionReason: 'Your demand generation lacks the consistency to support reliable growth.',
         opportunityTitle: 'Lead System Optimization',
-        opportunityWhy: 'Your lead flow is developing—systematic optimization will stabilize acquisition.',
+        opportunityWhy: 'Your lead flow is developing; systematic optimization will stabilize acquisition.',
         opportunityUnlock: 'Predictable pipeline, reduced revenue volatility',
         leverageTitle: 'Demand Scaling',
-        leverageWhy: 'Your lead system is strong—ready for volume increase.',
+        leverageWhy: 'Your lead system is strong, ready for volume increase.',
         leverageUnlock: 'Higher throughput, expanded market reach',
         team: 'marketing',
         relatedGoals: ['stabilize-leads', 'increase-revenue']
@@ -193,10 +193,10 @@ const SYSTEM_AREAS = {
         frictionTitle: 'Conversion inefficiencies',
         frictionReason: 'Leads are leaking through gaps in your funnel and follow-up process.',
         opportunityTitle: 'Funnel Tightening',
-        opportunityWhy: 'Your conversion has room to improve—small fixes can yield significant gains.',
+        opportunityWhy: 'Your conversion has room to improve; small fixes can yield significant gains.',
         opportunityUnlock: 'Higher close rates, better unit economics',
         leverageTitle: 'Conversion Scaling',
-        leverageWhy: 'Your conversion is solid—time to increase volume without sacrificing rates.',
+        leverageWhy: 'Your conversion is solid; time to increase volume without sacrificing rates.',
         leverageUnlock: 'Revenue acceleration without proportional cost increase',
         team: 'development',
         relatedGoals: ['improve-conversion', 'increase-revenue']
@@ -204,12 +204,12 @@ const SYSTEM_AREAS = {
     dataVisibility: {
         name: 'Data Visibility',
         frictionTitle: 'Limited performance visibility',
-        frictionReason: 'You can\'t optimize what you can\'t measure—blind spots are costly.',
+        frictionReason: "You can't optimize what you can't measure; blind spots are costly.",
         opportunityTitle: 'Analytics Infrastructure',
-        opportunityWhy: 'Your data setup is developing—structured tracking will unlock insights.',
+        opportunityWhy: 'Your data setup is developing; structured tracking will unlock insights.',
         opportunityUnlock: 'Data-driven decisions, faster iteration cycles',
         leverageTitle: 'Intelligence Layer',
-        leverageWhy: 'Your data foundation is strong—ready for advanced insights.',
+        leverageWhy: 'Your data foundation is strong, ready for advanced insights.',
         leverageUnlock: 'Predictive capabilities, proactive optimization',
         team: 'development',
         relatedGoals: ['scale-operations', 'improve-conversion']
@@ -219,10 +219,10 @@ const SYSTEM_AREAS = {
         frictionTitle: 'Operational friction',
         frictionReason: 'Team confusion and unclear processes are slowing down execution.',
         opportunityTitle: 'Process Standardization',
-        opportunityWhy: 'Your operations need structure—clear workflows will accelerate output.',
+        opportunityWhy: 'Your operations need structure; clear workflows will accelerate output.',
         opportunityUnlock: 'Faster execution, reduced bottlenecks',
         leverageTitle: 'Execution Optimization',
-        leverageWhy: 'Your processes are solid—time to fine-tune for efficiency.',
+        leverageWhy: 'Your processes are solid; time to fine-tune for efficiency.',
         leverageUnlock: 'Higher throughput, scalable operations',
         team: 'consultation',
         relatedGoals: ['scale-operations', 'increase-revenue']
@@ -890,7 +890,7 @@ const FloOSDiagnosticReport = ({ formData, onClose, referenceId }) => {
                                     </p>
                                     {(formData.growthGoals || []).length > 0 && (
                                         <p className="text-xs text-white/50 mt-2">
-                                            Your stated goals — {(formData.growthGoals || []).map(getGoalLabel).join(', ').toLowerCase()} —
+                                            Your stated goals, {(formData.growthGoals || []).map(getGoalLabel).join(', ').toLowerCase()},
                                             {(formData.bottlenecks || []).length > 0
                                                 ? ` are compounded by bottlenecks in ${(formData.bottlenecks || []).map(getBottleneckLabel).join(', ').toLowerCase()}.`
                                                 : ' inform the priorities below.'}
@@ -938,7 +938,7 @@ const FloOSDiagnosticReport = ({ formData, onClose, referenceId }) => {
                                 subtitle="Strengths we can amplify for growth"
                             />
                             <p className="text-xs text-white/40 mb-4 italic">
-                                These are areas you rated highly — they represent existing strengths to build on.
+                                These are areas you rated highly; they represent existing strengths to build on.
                             </p>
                             <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
                                 {growthOpportunities

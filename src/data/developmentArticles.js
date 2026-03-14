@@ -146,7 +146,7 @@ export const developmentArticles = [
             sections: [
                 {
                     heading: 'Content Assistance, Not Replacement',
-                    content: 'AI is a terrible writer but a great editor and brainstormer. Use it to generate variations, summarize data, or format inputs—not to write your final copy.'
+                    content: 'AI is a terrible writer but a great editor and brainstormer. Use it to generate variations, summarize data, or format inputs, not to write your final copy.'
                 },
                 {
                     heading: 'Data Parsing',

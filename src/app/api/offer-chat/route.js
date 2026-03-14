@@ -3,19 +3,19 @@ import { NextResponse } from 'next/server';
 const OFFER_KNOWLEDGE = {
     flo_os: {
         title: 'Flo OS',
-        whatItIs: 'Flo OS is a business growth operating system. It aligns your brand, content, distribution, and conversion into one synchronized organism — replacing the chaos of disconnected vendors with a single operating layer for growth.',
+        whatItIs: 'Flo OS is a business growth operating system. It aligns your brand, content, distribution, and conversion into one synchronized organism, replacing the chaos of disconnected vendors with a single operating layer for growth.',
         whatYouGet: 'You get clear growth direction, structured execution across all channels, reduced randomness, compounding results over time, a single operating layer that connects everything, and decision-making clarity.',
         pricing: 'Flo OS is a system-level engagement. Pricing is structured around the scope of your ecosystem and the number of active suites. Book a call to discuss your specific needs and get a tailored proposal.',
-        timeline: 'Month 1 is Architecture — business positioning, offer clarity, and growth priorities. Month 2 is System Activation — content systems, funnels, distribution, and workflows. Month 3+ is Optimization & Compounding — iteration, refinement, and scaling.',
+        timeline: 'Month 1 is Architecture, covering business positioning, offer clarity, and growth priorities. Month 2 is System Activation, including content systems, funnels, distribution, and workflows. Month 3+ is Optimization & Compounding, focusing on iteration, refinement, and scaling.',
         whoFor: 'Businesses tired of disconnected marketing. Founders who want systems, not tactics. Teams ready for long-term growth. Companies investing in clarity and scale.',
     },
     funnel_builder: {
         title: 'Funnel Builder',
-        whatItIs: 'Funnel Builder is a dedicated service to build high-converting paths for specific offers. We design, build, and connect the entire journey from click to close — a structured conversion system that turns attention into leads or actions.',
+        whatItIs: 'Funnel Builder is a dedicated service to build high-converting paths for specific offers. We design, build, and connect the entire journey from click to close, producing a structured conversion system that turns attention into leads or actions.',
         whatYouGet: 'You get lead generation or conversion infrastructure, clear measurable outcomes, an optimized customer journey, reusable conversion assets, complete tracking and analytics, and a scalable campaign foundation.',
         pricing: 'Funnel Builder is a purposeful engagement scoped around your specific offer or campaign. Pricing depends on the complexity of the funnel and the number of touchpoints. Book a call to get a proposal.',
-        timeline: 'Week 1 is Offer Definition — goal clarity and target audience alignment. Week 2 is Journey Design — mapping the complete customer path. Weeks 3–4 are Build & Connect — landing pages, creative assets, tracking, and automation.',
-        whoFor: 'Businesses launching a new offer, scaling an existing service, adding conversion to existing traffic, or needing results — not just visibility.',
+        timeline: 'Week 1 is Offer Definition, covering goal clarity and target audience alignment. Week 2 is Journey Design, mapping the complete customer path. Weeks 3–4 are Build & Connect, including landing pages, creative assets, tracking, and automation.',
+        whoFor: 'Businesses launching a new offer, scaling an existing service, adding conversion to existing traffic, or needing results, not just visibility.',
     },
     media_marketing: {
         title: 'Media Marketing',
@@ -77,7 +77,7 @@ export async function POST(request) {
     } catch (error) {
         console.error('Offer Chat Error:', error);
         return NextResponse.json({
-            reply: "I'd be happy to help — could you rephrase your question?",
+            reply: "I'd be happy to help; could you rephrase your question?",
             error: process.env.NODE_ENV === 'development' ? error.message : undefined,
         });
     }

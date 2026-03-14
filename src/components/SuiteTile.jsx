@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import OfferExpandedView from './OfferExpandedView';
 import AboutFloChat from './AboutFloChat';
-import { Sparkles, X, Maximize2, ArrowRight, ExternalLink, Send } from 'lucide-react';
+import { Sparkles, X, Maximize2, ArrowRight, ExternalLink, Send, Instagram, Youtube, Linkedin, Facebook } from 'lucide-react';
 const floLogo = '/assets/FLO.png';
 const osLogo = '/assets/OS.png';
 const connexLogo = '/assets/Connex2.png';
@@ -59,7 +59,7 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
     // For offer tiles, don't suppress during closing to maintain dark background
     const isOfferTile = suite.type === 'offer';
     const shouldSuppressHighlight = isClosing && !isOfferTile;
-    const isActive = highlightMode === 'active' && !shouldSuppressHighlight && !isSelected;
+    const isActive = highlightMode === 'active' && !shouldSuppressHighlight && !isSelected && suite.type !== 'logo-scroll';
     const isRelated = highlightMode === 'related' && !shouldSuppressHighlight && !isSelected;
     const isHighlighted = isActive || isRelated;
 
@@ -113,19 +113,6 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
 
         // RELATED STATE: All related tiles turn orange with subtle 3D glass effect
         if (isRelated) {
-            if (suite.id === 'connex') {
-                return {
-                    bg: 'bg-[#1A1A1A] backdrop-blur-[24px]',
-                    border: 'border-[rgba(255,255,255,0.08)]',
-                    title: 'text-white',
-                    tagline: 'text-white',
-                    icon: 'text-white/80',
-                    iconBg: 'bg-white/10 border-white/15',
-                    shadow: 'shadow-[0_4px_24px_rgba(0,0,0,0.4)]',
-                    innerShadow: 'inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.3)',
-                    glowOpacity: 0
-                };
-            }
             return {
                 bg: 'bg-[#F1592D]/90',
                 border: 'border-[rgba(255,255,255,0.15)]',
@@ -203,15 +190,79 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
         // Special Case: Connex Logo
         if (suite.title === 'Connex') {
             return (
-                <div className="flex items-center justify-center pointer-events-none w-full px-8">
+                <div className="flex items-center justify-center pointer-events-none w-full px-8 relative h-[40px] md:h-[50px]">
                     <img
                         src={connexLogo}
                         alt="Connex"
-                        className="w-full max-w-[130px] h-auto object-contain transition-all duration-300"
-                        style={{
-                            filter: ''
-                        }}
+                        className={`absolute w-full max-w-[160px] h-auto object-contain transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isHighlighted ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'}`}
                     />
+                    <img
+                        src="/assets/Connex-Logo.png"
+                        alt="Connex Hover"
+                        className={`absolute w-full max-w-[200px] h-auto object-contain transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isHighlighted ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}
+                        style={{ filter: 'brightness(0) invert(1)' }}
+                    />
+                </div>
+            );
+        }
+
+        if (suite.type === 'social') {
+            const IconComponent = 
+                suite.id === 'instagram' ? Instagram :
+                suite.id === 'youtube' ? Youtube :
+                suite.id === 'linkedin' ? Linkedin :
+                suite.id === 'facebook' ? Facebook : null;
+                
+            return (
+                <div className="flex items-center justify-center pointer-events-none w-full h-full">
+                    {IconComponent && <IconComponent className={`w-5 h-5 md:w-8 md:h-8 transition-all duration-300 ${isHighlighted ? 'text-white' : 'text-[#888888]'}`} />}
+                </div>
+            );
+        }
+
+        if (suite.type === 'logo-scroll') {
+            return (
+                <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center rounded-[2rem]">
+                    <style>{`
+                        @keyframes infiniteScroll {
+                            0% { transform: translateX(0); }
+                            100% { transform: translateX(-50%); }
+                        }
+                        .scroll-container {
+                            display: flex;
+                            width: max-content;
+                            animation: infiniteScroll 40s linear infinite;
+                        }
+                        .scroll-content {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-around;
+                            gap: 4rem;
+                            padding-right: 4rem; /* Exactly matches the gap */
+                            flex-shrink: 0;
+                        }
+                    `}</style>
+                    {/* Dark gradient masks on left and right to create horizontal fade effect */}
+                    <div className="absolute inset-0 pointer-events-none z-10" style={{
+                        background: 'linear-gradient(to right, #1A1A1A 0%, rgba(26,26,26,0) 25%, rgba(26,26,26,0) 75%, #1A1A1A 100%)'
+                    }} />
+                    
+                    <div className="scroll-container">
+                        {/* We repeat the array 4 times to ensure it fills any screen without breaking. 
+                            Since we translate -50%, it perfectly loops over 2 full duplicate blocks. */}
+                        {[0, 1, 2, 3].map((i) => (
+                            <div key={`set-${i}`} className="scroll-content" aria-hidden={i > 0 ? "true" : "false"}>
+                                {(suite.brands || []).map((brandSrc, idx) => (
+                                    <img 
+                                        key={`logo-${i}-${idx}`} 
+                                        src={brandSrc} 
+                                        alt="Brand Logo" 
+                                        className="h-8 md:h-12 w-auto max-w-[150px] object-contain"
+                                    />
+                                ))}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             );
         }
@@ -258,15 +309,41 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
             );
         }
 
-        // Special handling for Media Marketing - split into two lines
         if (suite.title === 'Media Marketing') {
             return (
                 <div className="flex flex-col items-center justify-center pointer-events-none w-full">
                     <span className={`text-4xl md:text-5xl font-bold tracking-tight transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${styles.title}`}>
                         Media
                     </span>
-                    <span className={`text-4xl md:text-5xl font-bold tracking-tight transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${styles.title}`}>
+                    <span className={`text-2xl md:text-[28px] font-bold tracking text-[#F1592D] transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] mt-1 md:mt-1`}>
                         Marketing
+                    </span>
+                </div>
+            );
+        }
+
+        // Special handling for EZInfo - Image default, Text on hover
+        if (suite.title === 'EZInfo') {
+            return (
+                <div className="flex flex-col items-center justify-center pointer-events-none w-full relative h-[40px] md:h-[48px]">
+                    <img
+                        src="/assets/EZInfo.png"
+                        alt="EZInfo"
+                        className={`absolute h-20 md:h-32 w-auto object-contain transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${isActive ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100 scale-100'}`}
+                    />
+                    <span className={`absolute text-4xl md:text-5xl font-bold tracking-tight transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${styles.title} ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'}`}>
+                        E<span className="text-[#F1592D]">Z</span>Info
+                    </span>
+                </div>
+            );
+        }
+
+        // Special handling for Funnel Builder
+        if (suite.title === 'Funnel Builder') {
+            return (
+                <div className="text-center pointer-events-none px-2 w-full">
+                    <span className={`text-4xl md:text-5xl font-bold tracking-tight transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${styles.title}`}>
+                        Funnel <span className="text-[#F1592D]">Builder</span>
                     </span>
                 </div>
             );
@@ -284,20 +361,30 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
     };
 
 
+    const handleTileClick = (e) => {
+        if (suite.id === 'connex' || suite.id === 'ez-info') return;
+        if (suite.type === 'social') {
+            if (suite.url) window.open(suite.url, '_blank', 'noopener,noreferrer');
+            return;
+        }
+        if (suite.type === 'logo-scroll') return;
+        onClick?.(e);
+    };
+
     return (
         <motion.div
             layout
             ref={tileRef}
-            onClick={(!isOtherSelected && suite.id !== 'connex') ? onClick : undefined}
+            onClick={!isOtherSelected ? handleTileClick : undefined}
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnterWrapper}
             onMouseLeave={onMouseLeave}
             className={`
                 relative rounded-[2rem] overflow-hidden group h-full
                 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]
-                ${!isSelected && !isOtherSelected && suite.id !== 'connex' ? 'cursor-pointer' : ''}
+                ${!isSelected && !isOtherSelected && suite.id !== 'connex' && suite.id !== 'ez-info' ? 'cursor-pointer' : 'cursor-default'}
                 
-                ${highlightMode === 'none' && !isSelected && !isOtherSelected && !isClosing && suite.id !== 'connex' ? 'hover:-translate-y-1 hover:shadow-2xl' : ''}
+                ${highlightMode === 'none' && !isSelected && !isOtherSelected && !isClosing && suite.id !== 'connex' && suite.id !== 'ez-info' ? 'hover:-translate-y-1 hover:shadow-2xl' : ''}
                 
                 ${styles.border}
                 border
@@ -324,7 +411,7 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
                     {!isSelected && (
                         <motion.div
                             key="tile-content"
-                            className="absolute inset-0 p-6 flex flex-col items-center justify-center text-center"
+                            className={`absolute inset-0 flex flex-col items-center justify-center text-center ${suite.type === 'social' ? 'p-0' : 'p-6'}`}
                             initial={false}
                             animate={{
                                 opacity: 1,
@@ -336,27 +423,29 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
                             }}
                         >
                             {/* Expand Icon - Absolutely Positioned */}
-                            {!isCenterpiece && suite.id !== 'connex' && (
+                            {!isCenterpiece && suite.id !== 'connex' && suite.type !== 'social' && suite.type !== 'logo-scroll' && (
                                 <div className={`absolute top-6 right-6 z-20 w-8 h-8 rounded-full flex items-center justify-center smooth-transition shadow-sm ${styles.iconBg} ${isActive || isRelated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0'}`}>
                                     <Maximize2 className={`w-4 h-4 ${styles.icon}`} />
                                 </div>
                             )}
 
                             {/* Center Content */}
-                            <div className="flex flex-col items-center justify-center w-full">
+                            <div className={`flex flex-col items-center justify-center w-full transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${suite.id === 'about-flo' && isActive ? '-translate-y-6' : 'translate-y-0'} ${suite.type === 'logo-scroll' ? 'h-full' : ''}`}>
                                 {renderTitle()}
 
                                 {/* Tagline / Subtitle - Reveal on Hover */}
-                                <div className={`overflow-hidden transition-all duration-500 ease-out ${isActive ? 'max-h-20 opacity-100 mt-2' : 'max-h-0 opacity-0 mt-0'}`}>
-                                    <p className={`text-sm font-medium leading-relaxed max-w-[200px] mx-auto ${styles.tagline} transition-colors duration-300`}>
-                                        {suite.tagline}
-                                    </p>
-                                </div>
+                                {suite.type !== 'logo-scroll' && (
+                                    <div className={`relative z-10 overflow-hidden transition-all duration-500 ease-out ${isActive ? `max-h-20 opacity-100 ${suite.id === 'connex' ? 'mt-3 md:mt-4' : 'mt-1 md:mt-1.5'}` : 'max-h-0 opacity-0 mt-0'}`}>
+                                        <p className={`text-sm font-medium leading-relaxed max-w-[200px] mx-auto ${styles.tagline} transition-colors duration-300`}>
+                                            {suite.tagline}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Teaser Chat Input - Wide & Bottom Aligned */}
                             {suite.id === 'about-flo' && (
-                                <div className={`absolute flex justify-center bottom-10 left-6 right-6 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+                                <div className={`absolute flex justify-center bottom-6 left-6 right-6 transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
                                     <motion.div
                                         layoutId="about-flo-input-field"
                                         className="relative w-[90%] h-11 bg-white/5 border border-white/10 rounded-full flex items-center px-4 overflow-hidden shadow-lg group-hover:border-white/20 transition-colors"
