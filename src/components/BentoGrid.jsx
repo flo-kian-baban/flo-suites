@@ -66,7 +66,7 @@ const BentoGrid = ({ expandedSuite, onTileClick, onClose, tilesReady = true }) =
         if (id === 'Funnel Builder') return ['studio', 'marketing', 'dev'];
         if (id === 'connex') return ['marketing', 'dev'];
         if (id === 'flo-os') {
-            const excludedIds = ['flo-os', 'brand-logos', 'about-flo', 'Funnel Builder', 'media-marketing', 'instagram', 'youtube', 'linkedin', 'facebook'];
+            const excludedIds = ['flo-os', 'brand-logos', 'about-flo', 'Funnel Builder', 'media-marketing', 'instagram', 'youtube', 'linkedin', 'email'];
             return suites.map(s => s.id).filter(sid => !excludedIds.includes(sid));
         }
         return [];

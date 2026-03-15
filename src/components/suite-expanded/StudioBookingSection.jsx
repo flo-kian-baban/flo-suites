@@ -211,9 +211,15 @@ const StudioBookingSection = () => {
     };
 
     return (
-        <div className="w-full flex flex-col md:px-8 pb-12 transition-all duration-500 min-h-[500px]">
+        <div className="w-full flex flex-col md:px-8 pb-12 transition-all duration-500 min-h-[500px] relative">
+            {/* Disabled Overlay — blocks all interaction */}
+            <div
+                className="absolute inset-0 z-20 rounded-2xl"
+                style={{ pointerEvents: 'all', cursor: 'not-allowed' }}
+            />
+
             {/* Section Header */}
-            <div className="flex items-center gap-6 py-4 mb-4">
+            <div className="flex items-center gap-6 py-4 mb-4 opacity-60">
                 <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-flo-orange/50 to-transparent" />
                 <span className="text-[12px] font-black uppercase tracking-[0.4em] text-white/90 whitespace-nowrap">
                     Booking
@@ -222,7 +228,7 @@ const StudioBookingSection = () => {
             </div>
 
             {/* Title & Subtitle */}
-            <div className="flex flex-col items-center text-center mt-6 mb-12">
+            <div className="flex flex-col items-center text-center mt-6 mb-12 opacity-60">
                 <span className="text-xl md:text-2xl font-bold text-white mb-1">
                     Ready to Capture?
                 </span>
@@ -231,149 +237,9 @@ const StudioBookingSection = () => {
                 </h3>
             </div>
 
-            <AnimatePresence mode="wait" initial={false}>
-                {step === 'calendar' && (
-                    <motion.div
-                        key="calendar"
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.98, transition: { duration: 0.15 } }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full h-full flex items-center justify-center"
-                    >
-                        <Calendar onSelectDate={handleDateSelect} />
-                    </motion.div>
-                )}
-
-                {step === 'form' && (
-                    <motion.div
-                        key="form"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10, transition: { duration: 0.15 } }}
-                        transition={{ duration: 0.3 }}
-                        className="max-w-xl mx-auto w-full pt-4"
-                    >
-                        <button
-                            onClick={() => setStep('calendar')}
-                            className="flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-sm font-medium mb-8 group"
-                        >
-                            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                            Choose a different date
-                        </button>
-
-                        <div className="flex flex-col items-center text-center mb-8">
-                            <h3 className="text-2xl font-bold text-white mb-2">
-                                Booking for {selectedDate?.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
-                            </h3>
-                            <p className="text-neutral-500 text-sm">
-                                Enter your details below to confirm this slot.
-                            </p>
-                        </div>
-
-                        <div className="space-y-5">
-                            <FloInput
-                                label="Full Name"
-                                value={form.name}
-                                onChange={(v) => handleChange('name', v)}
-                                error={errors.name}
-                                required
-                            />
-
-                            <div className="space-y-5">
-                                <FloInput
-                                    label="Email"
-                                    value={form.email}
-                                    onChange={(v) => handleChange('email', v)}
-                                    error={errors.email}
-                                    required
-                                />
-                                <FloInput
-                                    label="Phone"
-                                    value={form.phone}
-                                    onChange={(v) => handleChange('phone', v)}
-                                    error={errors.phone}
-                                    required
-                                />
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <FloDropdown
-                                    label="Start Time"
-                                    value={form.startTime}
-                                    onChange={(v) => handleChange('startTime', v)}
-                                    options={TIME_SLOTS}
-                                    placeholder="09:00"
-                                    error={errors.startTime}
-                                    required
-                                />
-                                <FloDropdown
-                                    label="End Time"
-                                    value={form.endTime}
-                                    onChange={(v) => handleChange('endTime', v)}
-                                    options={TIME_SLOTS}
-                                    placeholder="17:00"
-                                    error={errors.endTime}
-                                    required
-                                />
-                            </div>
-
-                            {totalHours && (
-                                <div className="flex justify-end -mt-2">
-                                    <span className="text-xs text-flo-orange font-medium flex items-center gap-1.5 bg-flo-orange/5 px-2 py-1 rounded">
-                                        <Clock className="w-3 h-3" />
-                                        Total: {totalHours} hrs
-                                    </span>
-                                </div>
-                            )}
-
-                            <FloTextarea
-                                label="Reason for Booking"
-                                value={form.reason}
-                                onChange={(v) => handleChange('reason', v)}
-                                placeholder="What are we shooting? (Optional context)"
-                                rows={3}
-                            />
-
-                            <div className="pt-6">
-                                <button
-                                    onClick={handleSubmit}
-                                    disabled={isSubmitting}
-                                    className="w-full py-4 rounded-xl bg-flo-orange hover:bg-flo-orange/90 text-white font-bold text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_30px_rgba(241,89,45,0.2)] hover:shadow-[0_0_40px_rgba(241,89,45,0.4)]"
-                                >
-                                    {isSubmitting ? 'Processing...' : 'Confirm Request'}
-                                </button>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-
-                {step === 'success' && (
-                    <motion.div
-                        key="success"
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        className="flex-1 flex flex-col items-center justify-center text-center max-w-lg mx-auto py-20"
-                    >
-                        <div className="w-24 h-24 rounded-full bg-flo-orange/5 border border-flo-orange/20 flex items-center justify-center mb-8 text-flo-orange shadow-[0_0_40px_rgba(241,89,45,0.1)]">
-                            <CheckCircle2 className="w-10 h-10" />
-                        </div>
-
-                        <h3 className="text-3xl font-bold text-white mb-4">Request Received</h3>
-                        <p className="text-neutral-400 leading-relaxed mb-12">
-                            We've received your booking request for <strong className="text-white">{selectedDate?.toLocaleDateString()}</strong>.
-                            Our studio team will review the availability and confirm with you shortly.
-                        </p>
-
-                        <button
-                            onClick={handleReset}
-                            className="px-8 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-colors text-sm font-bold"
-                        >
-                            Book Another Session
-                        </button>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <div className="opacity-60">
+                <Calendar onSelectDate={() => {}} />
+            </div>
         </div>
     );
 };

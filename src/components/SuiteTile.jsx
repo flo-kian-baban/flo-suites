@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import OfferExpandedView from './OfferExpandedView';
 import AboutFloChat from './AboutFloChat';
-import { Sparkles, X, Maximize2, ArrowRight, ExternalLink, Send, Instagram, Youtube, Linkedin, Facebook } from 'lucide-react';
+import { Sparkles, X, Maximize2, ArrowRight, ExternalLink, Send, Instagram, Youtube, Linkedin, Mail } from 'lucide-react';
 const floLogo = '/assets/FLO.png';
 const osLogo = '/assets/OS.png';
 const connexLogo = '/assets/Connex2.png';
@@ -211,7 +211,7 @@ const SuiteTile = ({ suite, isSelected, isOtherSelected, onClick, onClose, highl
                 suite.id === 'instagram' ? Instagram :
                 suite.id === 'youtube' ? Youtube :
                 suite.id === 'linkedin' ? Linkedin :
-                suite.id === 'facebook' ? Facebook : null;
+                suite.id === 'email' ? Mail : null;
                 
             return (
                 <div className="flex items-center justify-center pointer-events-none w-full h-full">

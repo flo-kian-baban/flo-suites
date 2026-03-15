@@ -299,7 +299,7 @@ export const suites = [
             team: {
                 lead: "Kian Baban",
                 leadAvatar: "/assets/kian.png",
-                size: "3-6 specialists",
+                size: "4 specialists",
                 responsibility: "Visual execution & brand consistency"
             },
             capabilities: [
@@ -359,7 +359,7 @@ export const suites = [
             team: {
                 lead: "Moe Nikkah",
                 leadAvatar: "/assets/Moe.png",
-                size: "3-6 specialists",
+                size: "2 specialists",
                 responsibility: "Strategy, buying & optimization"
             },
             capabilities: [
@@ -611,7 +611,7 @@ export const suites = [
             team: {
                 lead: "Kian Baban",
                 leadAvatar: "/assets/kian.png",
-                size: "3-6 specialists",
+                size: "2 specialists",
                 responsibility: "Development, integration & stability"
             },
             capabilities: [
@@ -659,7 +659,7 @@ export const suites = [
         id: 'instagram',
         title: 'Instagram',
         type: 'social',
-        url: 'https://instagram.com/flo',
+        url: 'https://www.instagram.com/flo.suites/',
         gridArea: 'social-1',
         gridConfig: { rowStart: 8, rowSpan: 1, colStart: 1, colSpan: 1 }
     },
@@ -667,7 +667,7 @@ export const suites = [
         id: 'youtube',
         title: 'YouTube',
         type: 'social',
-        url: 'https://youtube.com/@flo',
+        url: 'https://www.youtube.com/@Flosuites',
         gridArea: 'social-2',
         gridConfig: { rowStart: 8, rowSpan: 1, colStart: 2, colSpan: 1 }
     },
@@ -675,15 +675,15 @@ export const suites = [
         id: 'linkedin',
         title: 'LinkedIn',
         type: 'social',
-        url: 'https://linkedin.com/company/flo',
+        url: 'https://www.linkedin.com/company/102991985/admin/page-posts/published/',
         gridArea: 'social-3',
         gridConfig: { rowStart: 8, rowSpan: 1, colStart: 3, colSpan: 1 }
     },
     {
-        id: 'facebook',
-        title: 'Facebook',
+        id: 'email',
+        title: 'Email',
         type: 'social',
-        url: 'https://facebook.com/flo',
+        url: 'mailto:kian@flosuites.ca',
         gridArea: 'social-4',
         gridConfig: { rowStart: 8, rowSpan: 1, colStart: 4, colSpan: 1 }
     },
