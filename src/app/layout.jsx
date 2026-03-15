@@ -4,6 +4,10 @@ import MobileBlocker from '@/components/MobileBlocker';
 export const metadata = {
     title: 'Flo Suites',
     description: 'Integrated Business Operating Systems',
+    icons: {
+        icon: '/assets/Fav.png',
+        apple: '/assets/Webclip.png',
+    },
 };
 
 export default function RootLayout({ children }) {

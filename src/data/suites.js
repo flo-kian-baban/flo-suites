@@ -139,7 +139,7 @@ export const suites = [
         id: 'media-marketing',
         title: `Media Marketing`,
         type: 'offer',
-        tagline: 'Content + Distribution Engine',
+        tagline: 'Content Engine',
         gridArea: 'media-marketing',
         gridConfig: { rowStart: 4, rowSpan: 2, colStart: 1, colSpan: 2 },
         description: 'The ultimate growth engine. We combine high-velocity content production with scientific acquisition strategy to capture attention and convert it into revenue.',
@@ -167,7 +167,7 @@ export const suites = [
             outcomeDesc: "A monthly engine that keeps your brand consistently visible, relevant, and top-of-mind for your ideal customers.",
 
             whatItIs: [
-                "A consistent content + distribution engine",
+                "A consistent content engine",
                 "A way to stay visible, relevant, and active",
                 "A system for maintaining momentum",
                 "Regular, high-quality execution without rebuilding monthly"
@@ -410,7 +410,7 @@ export const suites = [
         id: 'Funnel Builder',
         title: 'Funnel Builder',
         type: 'offer',
-        tagline: 'Outcome-driven campaigns.',
+        tagline: 'Outcome-driven campaigns',
         gridArea: 'funnel-builder',
         gridConfig: { rowStart: 4, rowSpan: 2, colStart: 3, colSpan: 3 },
         description: 'A dedicated service to build high-converting paths for specific offers. We design, build, and connect the entire journey from click to close.',
